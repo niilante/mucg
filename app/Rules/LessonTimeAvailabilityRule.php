@@ -20,13 +20,13 @@ class LessonTimeAvailabilityRule implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
+     * @param  string $attribute
      * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-       return Lesson::isTimeAvailable(request()->input('weekday'), $value, request()->input('end_time'), request()->input('class_id'), request()->input('teacher_id'), $this->lesson);
+        return Lesson::isTimeAvailable(request()->input('weekday'), $value, request()->input('end_time'), request()->input('class_id'), request()->input('teacher_id'), $this->lesson);
     }
 
     /**
