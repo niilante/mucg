@@ -29,7 +29,7 @@ class Lesson extends Model
         'deleted_at',
     ];
 
-const WEEK_DAYS = [
+    const WEEK_DAYS = [
     '1' => 'Monday',
     '2' => 'Tuesday',
     '3' => 'Wednesday',
@@ -37,7 +37,7 @@ const WEEK_DAYS = [
     '5' => 'Friday',
     '6' => 'Saturday',
     '7' => 'Sunday',
-];
+    ];
 
     public function getDifferenceAttribute()
     {
@@ -77,17 +77,24 @@ const WEEK_DAYS = [
     public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson)
     {
         $lessons = self::where('weekday', $weekday)
-            ->when($lesson, function ($query) use ($lesson) {
-                $query->where('id', '!=', $lesson);
-            })
-            ->where(function ($query) use ($class, $teacher) {
-                $query->where('class_id', $class)
-                    ->orWhere('teacher_id', $teacher);
-            })
-            ->where([
+            ->when(
+                $lesson,
+                function ($query) use ($lesson) {
+                    $query->where('id', '!=', $lesson);
+                }
+            )
+            ->where(
+                function ($query) use ($class, $teacher) {
+                    $query->where('class_id', $class)
+                        ->orWhere('teacher_id', $teacher);
+                }
+            )
+            ->where(
+                [
                 ['start_time', '<', $endTime],
                 ['end_time', '>', $startTime]
-            ])
+                ]
+            )
             ->count();
 
         return !$lessons;
@@ -95,16 +102,28 @@ const WEEK_DAYS = [
 
     public function scopeCalendarByRoleOrClassId($query)
     {
-        return $query->when(!request()->input('class_id'), function ($query) {
-                $query->when(auth()->user()->is_teacher, function ($query) {
-                    $query->where('teacher_id', auth()->user()->id);
-                })
-                ->when(auth()->user()->is_student, function ($query) {
-                    $query->where('class_id', auth()->user()->class_id ?? '0');
-                });
-            })
-            ->when(request()->input('class_id'), function ($query) {
-                $query->where('class_id', request()->input('class_id'));
-            });
+        return $query->when(
+            !request()->input('class_id'),
+            function ($query) {
+                $query->when(
+                    auth()->user()->is_teacher,
+                    function ($query) {
+                        $query->where('teacher_id', auth()->user()->id);
+                    }
+                )
+                ->when(
+                    auth()->user()->is_student,
+                    function ($query) {
+                        $query->where('class_id', auth()->user()->class_id ?? '0');
+                    }
+                );
+            }
+        )
+            ->when(
+                request()->input('class_id'),
+                function ($query) {
+                    $query->where('class_id', request()->input('class_id'));
+                }
+            );
     }
 }
