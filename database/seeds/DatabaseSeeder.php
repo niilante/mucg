@@ -6,7 +6,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $this->call([
+        $this->call(
+            [
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
             LessonsTableSeeder::class,
-        ]);
+            ]
+        );
     }
 }
