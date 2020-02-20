@@ -8,11 +8,23 @@ class CreateSchoolClassesTable extends Migration
 {
     public function up()
     {
-        Schema::create('school_classes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::create(
+            'school_classes', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->timestamps();
+                $table->softDeletes();
+            }
+        );
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('school_classes');
     }
 }

@@ -8,11 +8,23 @@ class AddRelationshipFieldsToLessonsTable extends Migration
 {
     public function up()
     {
-        Schema::table('lessons', function (Blueprint $table) {
-            $table->unsignedInteger('teacher_id');
-            $table->foreign('teacher_id', 'teacher_fk_1001496')->references('id')->on('users');
-            $table->unsignedInteger('class_id');
-            $table->foreign('class_id', 'class_fk_1001508')->references('id')->on('school_classes');
-        });
+        Schema::table(
+            'lessons', function (Blueprint $table) {
+                $table->unsignedInteger('teacher_id');
+                $table->foreign('teacher_id', 'teacher_fk_1001496')->references('id')->on('users');
+                $table->unsignedInteger('class_id');
+                $table->foreign('class_id', 'class_fk_1001508')->references('id')->on('school_classes');
+            }
+        );
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('lessons');
     }
 }
