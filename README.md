@@ -1,4 +1,4 @@
-# Laravel 6 School Timetable Calendar
+# Methodist University College, Ghana School Timetable Calendar
 
 Demo-project showing how to use roles-permissions (students, teachers, admins), Eloquent Query Scopes and how to build a simple table-based timetable calendar without any JavaScript plugin.
 
@@ -39,10 +39,6 @@ Basically, feel free to use and re-use any way you want.
 
 - - - - -
 
-## More from our LaravelDaily Team
+## Our Team
 
-- Check out our adminpanel generator [QuickAdminPanel](https://quickadminpanel.com)
-- Read our [Blog with Laravel Tutorials](https://laraveldaily.com)
-- FREE E-book: [50 Laravel Quick Tips (and counting)](https://laraveldaily.com/free-e-book-40-laravel-quick-tips-and-counting/)
-- Subscribe to our [YouTube channel Laravel Business](https://www.youtube.com/channel/UCTuplgOBi6tJIlesIboymGA)
-- Enroll in our [Laravel Online Courses](https://laraveldaily.teachable.com/)
+- Check out sabolai [Sabolai](https://sabolai.com)
