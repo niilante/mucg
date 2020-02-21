@@ -11,10 +11,12 @@ class LessonsTest extends DuskTestCase
     public function testIndex()
     {
         $admin = \App\User::find(1);
-        $this->browse(function (Browser $browser) use ($admin) {
-            $browser->loginAs($admin);
-            $browser->visit(route('admin.lessons.index'));
-            $browser->assertRouteIs('admin.lessons.index');
-        });
+        $this->browse(
+            function (Browser $browser) use ($admin) {
+                $browser->loginAs($admin);
+                $browser->visit(route('admin.lessons.index'));
+                $browser->assertRouteIs('admin.lessons.index');
+            }
+        );
     }
 }
