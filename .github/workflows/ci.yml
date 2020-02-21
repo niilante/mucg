@@ -27,12 +27,24 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer install --prefer-dist
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
           php artisan key:generate
+
+      - name: Upgrade Chrome Driver
+          run: php artisan dusk:chrome-driver
+
+      - name: Start Chrome Driver
+          run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+      - name: Run Laravel Server
+          run: php artisan serve &
+          
+      - name: Run Dusk Tests
+          run: php artisan dusk
 
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
