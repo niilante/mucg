@@ -2,6 +2,8 @@
 
 Demo-project showing how to use roles-permissions (students, teachers, admins), Eloquent Query Scopes and how to build a simple table-based timetable calendar without any JavaScript plugin.
 
+![CI](https://github.com/niilante/mucg/workflows/CI/badge.svg)
+
 - - - - -
 
 ## Screenshots 
