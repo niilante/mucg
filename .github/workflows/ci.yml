@@ -35,16 +35,15 @@ jobs:
           php artisan key:generate
 
       - name: Upgrade Chrome Driver
-          run: php artisan dusk:chrome-driver
+        run: php artisan dusk:chrome-driver
 
       - name: Start Chrome Driver
-          run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Run Laravel Server
-          run: php artisan serve &
-          
+        run: php artisan serve &
       - name: Run Dusk Tests
-          run: php artisan dusk
+        run: php artisan dusk
 
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
