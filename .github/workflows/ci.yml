@@ -7,7 +7,8 @@ name: CI
 jobs:
   phpunit:
     runs-on: ubuntu-latest
-    container: image: kirschbaumdevelopment/laravel-test-runner:7.3
+    container: 
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
     container: docker: //zaherg/laravel-dusk:7.3
     services:
       mysql:
