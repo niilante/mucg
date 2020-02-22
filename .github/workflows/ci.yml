@@ -47,7 +47,7 @@ jobs:
         run: php artisan serve &
 
       - name: Run Dusk Tests
-      run: |
-        nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
-        nohup bash -c 'php artisan serve > /dev/null 2>&1 &'
-        php artisan dusk
+        run: |
+          nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
+          nohup bash -c 'php artisan serve > /dev/null 2>&1 &'
+          php artisan dusk
