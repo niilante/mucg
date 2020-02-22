@@ -5,49 +5,54 @@ on:
       - develop
 name: CI
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-    container: 
-      - image: kirschbaumdevelopment/laravel-test-runner:7.3
-      - docker: //zaherg/laravel-dusk:7.3
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: mucg
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  job1:
+    name: Main test job
+      phpunit:
+        runs-on: ubuntu-latest
+        container:
+          image: kirschbaumdevelopment/laravel-test-runner:7.3
 
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+        services:
+          mysql:
+            image: mysql:5.7
+            env:
+              MYSQL_ROOT_PASSWORD: password
+              MYSQL_DATABASE: mucg
+            ports:
+              - 33306:3306
+            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-      - name: Install composer dependencies
-        run: |
-          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+        steps:
+          - uses: actions/checkout@v1
+            with:
+              fetch-depth: 1
 
-      - name: Prepare Laravel Application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
+          - name: Install composer dependencies
+            run: |
+              composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
-      - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
+          - name: Prepare Laravel Application
+            run: |
+              cp .env.ci .env
+              php artisan key:generate
 
-      - name: Update Chrome Driver
-        run: php artisan dusk:chrome-driver
+          - name: Run Testsuite
+            run: vendor/bin/phpunit tests/
 
-      - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+  job2:
+    name: Dusk test job
+      needs: job1
+      phpunit:
+        container: docker://zaherg/laravel-dusk:7.3
 
-      - name: Run Laravel Server
-        run: php artisan serve &
+      steps:
+        - name: Upgrade Chrome Driver
+          run: php artisan dusk:chrome-driver
 
-      - name: Run Dusk Tests
-        run: |
-          nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
-          nohup bash -c 'php artisan serve > /dev/null 2>&1 &'
-          php artisan dusk
+        - name: Start Chrome Driver
+          run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+        - name: Run Laravel Server
+          run: php artisan serve &
+        - name: Run Dusk Tests
+          run: php artisan dusk
