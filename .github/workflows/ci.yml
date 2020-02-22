@@ -5,67 +5,74 @@ on:
       - develop
 name: CI
 jobs:
-  job1:
-    name: Main test job
-    phpunit:
-      runs-on: ubuntu-latest
-      container:
-        image: kirschbaumdevelopment/laravel-test-runner:7.3
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
 
-        services:
-          mysql:
-            image: mysql:5.7
-            env:
-              MYSQL_ROOT_PASSWORD: password
-              MYSQL_DATABASE: mucg
-            ports:
-              - 33306:3306
-            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: mucg
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-        steps:
-          - uses: actions/checkout@v1
-            with:
-              fetch-depth: 1
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
-          - name: Install composer dependencies
-            run: |
-              composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+      - name: Install composer dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
-          - name: Prepare Laravel Application
-            run: |
-              cp .env.ci .env
-              php artisan key:generate
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
 
-          - name: Run Testsuite
-            run: vendor/bin/phpunit tests/
+      - name: Run Testsuite
+        run: vendor/bin/phpunit tests/
 
-  job2:
-    name: Dusk test job
-    phpunit:
-      runs-on: ubuntu-latest
-      container: docker://zaherg/laravel-dusk:7.3
-        services:
-          mysql:
-            image: mysql:5.7
-            env:
-              MYSQL_ROOT_PASSWORD: password
-              MYSQL_DATABASE: mucg
-            ports:
-              - 33306:3306
-            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  dusk-php-latest:
+    runs-on: ubuntu-latest
+    container: docker://zaherg/laravel-dusk:latest
 
-        steps:
-          - uses: actions/checkout@v1
-            with:
-              fetch-depth: 1
-              
-          - name: Upgrade Chrome Driver
-            run: php artisan dusk:chrome-driver
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: mucg
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
-          - name: Start Chrome Driver
-            run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+      - name: Prepare the environment
+        run: cp .env.ci .env
 
-          - name: Run Laravel Server
-            run: php artisan serve &
-          - name: Run Dusk Tests
-            run: php artisan dusk
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+      
+        - name: Install Composer dependencies
+        run: php artisan key:generate
+      
+        - name: Upgrade chrome driver
+        run: php artisan dusk:chrome-driver
+      
+        - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+      
+        - name: Run Laravel Server
+        run: php artisan serve > /dev/null 2>&1 &
+      
+        - name: Run dusk tests
+        run: php artisan dusk
