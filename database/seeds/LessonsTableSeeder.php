@@ -20,6 +20,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 1,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 2,
@@ -28,6 +30,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 1,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 3,
@@ -36,6 +40,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 1,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 4,
@@ -44,6 +50,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 1,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 5,
@@ -52,6 +60,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 2,
                 'start_time' => '08:00',
                 'end_time'   => '10:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 6,
@@ -60,6 +70,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 2,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 7,
@@ -68,6 +80,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 2,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 8,
@@ -76,6 +90,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 3,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 9,
@@ -84,6 +100,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 3,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 10,
@@ -92,6 +110,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 3,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 11,
@@ -100,6 +120,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 4,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 12,
@@ -108,6 +130,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 4,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 13,
@@ -116,6 +140,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 4,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 14,
@@ -124,6 +150,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 5,
                 'start_time' => '08:00',
                 'end_time'   => '10:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 15,
@@ -132,6 +160,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 5,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id'         => 16,
@@ -140,6 +170,8 @@ class LessonsTableSeeder extends Seeder
                 'weekday'    => 5,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ],
         ];
 

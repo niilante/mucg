@@ -33,7 +33,7 @@
                                         @if ($lesson)
                                             <td rowspan="{{ $lesson->difference/30 ?? '' }}" class="align-middle text-center" style="background-color:#f0f0f0">
                                                 {{ $lesson->class->name }}<br>
-                                                Teacher: {{ $lesson->teacher->name }}
+                                                Lecturer: {{ $lesson->teacher->name }}
                                             </td>
                                         @elseif ($lessons->where('weekday', $index)->where('start_time', '<', $time['start'])->where('end_time', '>=', $time['end'])->count())
                                             

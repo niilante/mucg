@@ -15,6 +15,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 2,
@@ -23,6 +25,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 3,
@@ -31,6 +35,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 4,
@@ -39,6 +45,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 5,
@@ -47,6 +55,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 6,
@@ -55,6 +65,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => null,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
             [
                 'id'             => 7,
@@ -63,6 +75,8 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
                 'remember_token' => null,
                 'class_id'       => 1,
+                'created_at'     => date("Y-m-d H:i:s"),
+                'updated_at'     => date("Y-m-d H:i:s"),
             ],
         ];
 
