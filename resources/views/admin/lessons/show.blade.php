@@ -44,7 +44,7 @@
                             {{ trans('cruds.lesson.fields.weekday') }}
                         </th>
                         <td>
-                            {{ $lesson->weekday }}
+                            {{ $lesson->weekday->name }}
                         </td>
                     </tr>
                     <tr>

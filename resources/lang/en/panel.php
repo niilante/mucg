@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'School Timetable',
+    'site_title' => 'MUCG School Timetable',
 ];
