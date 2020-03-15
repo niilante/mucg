@@ -1,79 +1,69 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card mx-4">
-            <div class="card-body p-4">
-                <h1>{{ trans('panel.site_title') }}</h1>
-
-                <p class="text-muted">{{ trans('global.login') }}</p>
-
-                @if(session('message'))
-                    <div class="alert alert-info" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </div>
-
-                        <input id="email" name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}">
-
-                        @if($errors->has('email'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('email') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                        </div>
-
-                        <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }}">
-
-                        @if($errors->has('password'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('password') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="input-group mb-4">
-                        <div class="form-check checkbox">
-                            <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
-                            <label class="form-check-label" for="remember" style="vertical-align: middle;">
-                                {{ trans('global.remember_me') }}
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-primary px-4">
-                                {{ trans('global.login') }}
-                            </button>
-                        </div>
-                        <div class="col-6 text-right">
-                            @if(Route::has('password.request'))
-                                <a class="btn btn-link px-0" href="{{ route('password.request') }}">
-                                    {{ trans('global.forgot_password') }}
-                                </a><br>
-                            @endif
-
-                        </div>
-                    </div>
-                </form>
+    <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
+        <div class="authentication-form mx-auto">
+            <div class="logo-centered">
+                <a href="{{ route('login') }}"><img src="{{asset('assets/src/img/mucg.png')}}" width="80px" alt="{{ config('app.name') }}"></a>
             </div>
+            <h3 style="text-align: center !important">{{ trans('panel.site_title') }}</h3>
+
+            @if(Session::has('message'))
+            <p style="text-align: center !important" class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+
+            @else
+
+            <p style="text-align: center !important">Happy to see you again!</p>
+
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div class="form-group">
+                    <input id="email" type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ trans('global.login_email') }}" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <i class="ik ik-user"></i>
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <input id="password" type="password" name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" placeholder="{{ trans('global.login_password') }}">
+                    <i class="ik ik-lock"></i>
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="row">
+                    <div class="col text-left">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="remember" name="remember" value="option1">
+                            <span class="custom-control-label">&nbsp;{{ trans('global.remember_me') }}</span>
+                        </label>
+                    </div>
+
+                    <div class="col text-right text-center">
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" style="color: #0023c8 !important;" href="{{ route('password.request') }}">
+                                {{ trans('global.forgot_password') }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <div class="sign-btn text-center">
+                    <div class="col-lg-8" style="margin:0 auto !important">
+                        <button type="submit" style="background-color: #0023c8 !important; border: #0023c8 !important" class="btn btn-primary btn-block mr-2">{{ trans('global.login') }}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 @endsection
