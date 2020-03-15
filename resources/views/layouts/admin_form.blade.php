@@ -1,219 +1,3 @@
-{{-- <!DOCTYPE html>
-<html>
-
-@include('layouts.admin.head')
-
-<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-
-    @include('layouts.admin.header')
-    <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full">{{ trans('panel.site_title') }}</span>
-            <span class="navbar-brand-minimized">{{ trans('panel.site_title') }}</span>
-        </a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <ul class="nav navbar-nav ml-auto">
-            @if(count(config('panel.available_languages', [])) > 1)
-                <li class="nav-item dropdown d-md-down-none">
-                    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ strtoupper(app()->getLocale()) }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        @foreach(config('panel.available_languages') as $langLocale => $langName)
-                            <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a>
-                        @endforeach
-                    </div>
-                </li>
-            @endif
-
-
-        </ul>
-    </header>
-
-
-    <div class="app-body">
-        @include('partials.menu')
-        <main class="main">
-
-
-            <div style="padding-top: 20px" class="container-fluid">
-                @if(session('message'))
-                    <div class="row mb-2">
-                        <div class="col-lg-12">
-                            <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                        </div>
-                    </div>
-                @endif
-                @if($errors->count() > 0)
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @yield('content')
-
-            </div>
-
-
-        </main>
-        <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-        </form>
-    </div>
-    <script src="{{asset('assets/dist/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/popper.js/dist/umd/popper.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/datedropper/datedropper.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/moment/moment.js')}}"></script>
-    <script src="{{asset('assets/plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/screenfull/dist/screenfull.js')}}"></script>
-    <script src="{{asset('assets/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/amcharts.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/gauge.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/serial.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/themes/light.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/animate.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/amcharts/pie.js')}}"></script>
-    <script src="{{asset('assets/plugins/ammap3/ammap/ammap.js')}}"></script>
-    <script src="{{asset('assets/plugins/ammap3/ammap/maps/js/usaLow.js')}}"></script>
-    <script src="{{asset('assets/dist/js/theme.min.js')}}"></script>
-    <script src="{{asset('assets/js/chart-amcharts.js')}}"></script>
-    <script src="{{asset('assets/js/chart-amcharts.js')}}"></script>
-    <script src="{{asset('assets/js/alerts.js')}}"></script>
-    @include('layouts.admin.notify')
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>window.jQuery || document.write('')</script>
-    <script src="{{asset('assets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('assets/js/datatables.js')}}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        $(function() {
-          let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
-          let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
-          let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
-          let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
-          let printButtonTrans = '{{ trans('global.datatables.print') }}'
-          let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
-          let selectAllButtonTrans = '{{ trans('global.select_all') }}'
-          let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
-
-          let languages = {
-            'en': '{{ asset('i18n/English.json') }}'
-          };
-
-          $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
-          $.extend(true, $.fn.dataTable.defaults, {
-            language: {
-              url: languages['{{ app()->getLocale() }}']
-            },
-            columnDefs: [{
-                orderable: false,
-                className: 'select-checkbox',
-                targets: 0
-            }, {
-                orderable: false,
-                searchable: false,
-                targets: -1
-            }],
-            select: {
-              style:    'multi+shift',
-              selector: 'td:first-child'
-            },
-            order: [],
-            scrollX: true,
-            pageLength: 100,
-            dom: 'lBfrtip<"actions">',
-            buttons: [
-              {
-                extend: 'selectAll',
-                className: 'btn-primary',
-                text: selectAllButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'selectNone',
-                className: 'btn-primary',
-                text: selectNoneButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'copy',
-                className: 'btn-default',
-                text: copyButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'csv',
-                className: 'btn-default',
-                text: csvButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'excel',
-                className: 'btn-default',
-                text: excelButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'pdf',
-                className: 'btn-default',
-                text: pdfButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'print',
-                className: 'btn-default',
-                text: printButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              },
-              {
-                extend: 'colvis',
-                className: 'btn-default',
-                text: colvisButtonTrans,
-                exportOptions: {
-                  columns: ':visible'
-                }
-              }
-            ]
-          });
-
-          $.fn.dataTable.ext.classes.sPageButton = '';
-        });
-
-    </script>
-    @yield('scripts')
-</body>
-
-</html> --}}
-
-
 <!doctype html>
 <html class="no-js" lang="en">
     @include('layouts.admin.head')
@@ -226,9 +10,7 @@
             @include('layouts.admin.header')
 
             <div class="page-wrap">
-
                 @include('layouts.admin.side_bar')
-
                 @yield('content')
                 <aside class="right-sidebar">
                     <div class="sidebar-chat" data-plugin="chat-sidebar">
@@ -250,7 +32,7 @@
                                 </a>
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Billy Black">
                                     <figure class="user--online">
-                                        <img src="{{asset('assets/img/users/2.jpg')}}" class="rounded-circle" alt="">
+                                        <img src="{{asset('assets/img/users/1.jpg')}}" class="rounded-circle" alt="">
                                     </figure><span><span class="name">Billy Black</span>  <span class="username">@billyblack</span> </span>
                                 </a>
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Herbert Diaz">
@@ -368,6 +150,10 @@
                 @include('layouts.admin.footer')
             </div>
         </div>
+
+
+
+
         <div class="modal fade apps-modal" id="appsModal" tabindex="-1" role="dialog" aria-labelledby="appsModalLabel" aria-hidden="true" data-backdrop="false">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ik ik-x-circle"></i></button>
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -384,14 +170,10 @@
                             </div>
                         </div>
                     </div>
-
                     @include('layouts.admin.nav_modal')
-
                 </div>
             </div>
         </div>
-
-
         @include('layouts.admin.scriptsjs')
     </body>
 </html>
