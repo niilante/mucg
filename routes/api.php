@@ -1,21 +1,18 @@
 <?php
 
-Route::group(
-    ['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']],
-    function () {
-        // Permissions
-        Route::apiResource('permissions', 'PermissionsApiController');
+use Illuminate\Http\Request;
 
-        // Roles
-        Route::apiResource('roles', 'RolesApiController');
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
 
-        // Users
-        Route::apiResource('users', 'UsersApiController');
-
-        // Lessons
-        Route::apiResource('lessons', 'LessonsApiController');
-
-        // School Classes
-        Route::apiResource('school-classes', 'SchoolClassesApiController');
-    }
-);
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
