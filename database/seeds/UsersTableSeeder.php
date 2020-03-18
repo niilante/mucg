@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
                 'id'             => 1,
                 'name'           => 'Admin',
                 'email'          => 'admin@admin.com',
-                'img_url'        => 'assets/img/users/user.png',
+                'img_url'        => 'assets/img/users/2.jpg',
                 'password'       => Hash::make('password'),
                 'remember_token' => null,
                 'class_id'       => null,
