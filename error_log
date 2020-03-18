@@ -1,0 +1,2 @@
+[18-Mar-2020 00:05:51 UTC] PHP Fatal error:  Cannot declare class CreateUsersTable, because the name is already in use in /home/adomxazw/mucg.ordstores.co/mucg/database/migrations/2020_02_13_000003_create_users_table.php on line 35
+[18-Mar-2020 00:07:48 UTC] PHP Fatal error:  Cannot declare class CreateUsersTable, because the name is already in use in /home/adomxazw/mucg.ordstores.co/mucg/database/migrations/2020_02_13_000003_create_users_table.php on line 35

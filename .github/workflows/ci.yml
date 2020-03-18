@@ -1,0 +1,90 @@
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+name: CI
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: mucg
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Install composer dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+
+          - name: Upgrade chrome driver
+          run: php artisan dusk:chrome-driver
+        
+        - name: Start Chrome Driver
+          run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        
+        - name: Run Laravel Server
+          run: php artisan serve > /dev/null 2>&1 &
+        
+        - name: Run dusk tests
+          run: php artisan dusk
+
+      - name: Run Testsuite
+        run: vendor/bin/phpunit tests/
+
+  # dusk-php-latest:
+  #   runs-on: ubuntu-latest
+  #   container: docker://zaherg/laravel-dusk:latest
+
+  #   services:
+  #     mysql:
+  #       image: mysql:5.7
+  #       env:
+  #         MYSQL_ROOT_PASSWORD: password
+  #         MYSQL_DATABASE: mucg
+  #       ports:
+  #         - 33306:3306
+  #       options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #       with:
+  #         fetch-depth: 1
+
+  #     - name: Prepare the environment
+  #       run: cp .env.ci .env
+
+  #     - name: Install Composer dependencies
+  #       run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+      
+  #     - name: Install Composer dependencies
+  #       run: php artisan key:generate
+      
+  #     - name: Upgrade chrome driver
+  #       run: php artisan dusk:chrome-driver
+      
+  #     - name: Start Chrome Driver
+  #       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+      
+  #     - name: Run Laravel Server
+  #       run: php artisan serve > /dev/null 2>&1 &
+      
+  #     - name: Run dusk tests
+  #       run: php artisan dusk
