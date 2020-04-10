@@ -20,6 +20,7 @@ class Lesson extends Model
 
     protected $fillable = [
         'weekday',
+        'weekname',
         'class_id',
         'end_time',
         'teacher_id',

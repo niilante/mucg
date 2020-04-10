@@ -42,7 +42,7 @@
                     {{ $lesson->teacher->name ?? '' }}
                 </td>
                 <td>
-                    {{ $lesson->weekday ?? '' }}
+                    {{ $lesson->weekname ?? '' }}
                 </td>
                 <td>
                     {{ $lesson->start_time ?? '' }}
@@ -54,22 +54,15 @@
 
                     <div class="table-actions">
                         @can('lesson_show')
-                            <a href="{{ route('admin.lessons.show', $lesson->id) }}">
-                                <i class="ik ik-eye"></i>
+                            <a href="{{ route('admin.lessons.show', $lesson->id) }}" data-toggle="tooltip" title="Show">
+                                <i class="ik ik-eye f-16 mr-15 text-blue"></i>
                             </a>
                         @endcan
                         @can('lesson_edit')
-                            <a href="{{ route('admin.lessons.edit', $lesson->id) }}">
-                                <i class="ik ik-edit-2"></i>
+                            <a href="{{ route('admin.lessons.edit', $lesson->id) }}" data-toggle="tooltip" title="Edit">
+                                <i class="ik ik-edit-2 f-16 mr-15 text-green"></i>
                             </a>
                         @endcan
-
-                        {{-- @can('lesson_delete')
-                            <a href="#">
-                                <i class="ik ik-trash-2"></i>
-                            </a>
-                        @endcan --}}
-
                         {{-- @can('lesson_delete')
                             <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                 <input type="hidden" name="_method" value="DELETE">
@@ -77,7 +70,7 @@
                                 <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                             </form>
                         @endcan --}}
-                   </div>
+                    </div>
                 </td>
 
             </tr>

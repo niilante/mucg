@@ -1,5 +1,5 @@
 @extends('layouts.admin_datatable')
-
+@section('title', __('All Lessons'))
 @section('content')
 <div class="main-content">
     <div class="container-fluid">
