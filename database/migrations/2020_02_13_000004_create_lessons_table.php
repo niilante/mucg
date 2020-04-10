@@ -12,6 +12,7 @@ class CreateLessonsTable extends Migration
             'lessons', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('weekday');
+                $table->string('weekname');
                 $table->time('start_time');
                 $table->time('end_time');
                 $table->timestamps();
