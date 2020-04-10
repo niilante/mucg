@@ -1,3 +1,4 @@
+@include('layouts.admin.head')
 @extends('errors::minimal')
 
 @section('title', __('Unauthorized'))

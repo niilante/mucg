@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', __('Add user'))
 @section('content')
 
 <div class="card">
