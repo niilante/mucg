@@ -10,7 +10,7 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("admin.users.update", [$user->id]) }}" enctype="multipart/form-data">
+                <form class="sample-form" method="POST" action="{{ route("admin.users.update", [$user->id]) }}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
@@ -49,7 +49,7 @@
                             <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                             <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                         </div>
-                        <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
+                        <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple="multiple" required>
                             @foreach($roles as $id => $roles)
                                 <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
                             @endforeach
@@ -61,6 +61,7 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
                     </div>
+
                     <div class="form-group">
                         <label for="class_id">{{ trans('cruds.user.fields.class') }}</label>
                         <select class="form-control select2 {{ $errors->has('class') ? 'is-invalid' : '' }}" name="class_id" id="class_id">
@@ -76,7 +77,7 @@
                         <span class="help-block">{{ trans('cruds.user.fields.class_helper') }}</span>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-danger" type="submit">
+                        <button class="btn btn-success" type="submit">
                             {{ trans('global.save') }}
                         </button>
                     </div>
