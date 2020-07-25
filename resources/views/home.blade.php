@@ -33,11 +33,16 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Cumulative</h6>
-                                <h2>8,500</h2>
+                                <h6>Total No. of Users</h6>
+
+                                @if( $user_counts > 0)
+                                    <h2>{{ $user_counts }}</h2>
+                                @else 
+                                @endif
+
                             </div>
                             <div class="icon">
-                                <i class="ik ik-pause"></i>
+                                <i class="ik ik-users"></i>
                             </div>
                         </div>
                         <small class="text-small mt-10 d-block">6% higher than previous total</small>
@@ -52,8 +57,12 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Previous Total</h6>
-                                <h2>7,800</h2>
+                                <h6>Total No. of Lectures</h6>
+                                @if( $user_counts > 0)
+                                    <h2>{{ $school_class_counts }}</h2>
+                                @else
+                                    
+                                @endif
                             </div>
                             <div class="icon">
                                 <i class="ik ik-bar-chart-2"></i>
@@ -71,11 +80,11 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Current Total</h6>
-                                <h2>700</h2>
+                                <h6>Total No. of Shedules</h6>
+                                <h2>540</h2>
                             </div>
                             <div class="icon">
-                                <i class="ik ik-bar-chart"></i>
+                                <i class="ik ik-calendar"></i>
                             </div>
                         </div>
                         <small class="text-small mt-10 d-block">80% of monthly average</small>
@@ -90,11 +99,11 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Rejects</h6>
-                                <h2>650</h2>
+                                <h6>Total No. of Resources</h6>
+                                <h2>153</h2>
                             </div>
                             <div class="icon">
-                                <i class="ik ik-trash-2"></i>
+                                <i class="ik ik-airplay"></i>
                             </div>
                         </div>
                         <small class="text-small mt-10 d-block">72% of monthly average</small>

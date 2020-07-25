@@ -2,9 +2,9 @@
 <table id="data_table" class=" table table-bordered table-striped table-hover datatable datatable-Lesson">
     <thead>
         <tr>
-            <th class="nosort" width="10">
+            {{-- <th class="nosort" width="10">
 
-            </th>
+            </th> --}}
             <th>
                 {{ trans('cruds.lesson.fields.id') }}
             </th>
@@ -23,15 +23,16 @@
             <th>
                 {{ trans('cruds.lesson.fields.end_time') }}
             </th>
-            <th class="nosort">&nbsp;</th>
+            <th class="nosort text-center">{{ trans('cruds.lesson.fields.actions') }}</th>
+            {{-- <th class="nosort">&nbsp;</th> --}}
         </tr>
     </thead>
     <tbody>
         @foreach($lessons as $key => $lesson)
             <tr data-entry-id="{{ $lesson->id }}">
-                <td>
+                {{-- <td>
 
-                </td>
+                </td> --}}
                 <td>
                     {{ $lesson->id ?? '' }}
                 </td>
@@ -45,14 +46,14 @@
                     {{ $lesson->weekname ?? '' }}
                 </td>
                 <td>
-                    {{ $lesson->start_time ?? '' }}
+                    {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
                 </td>
                 <td>
-                    {{ $lesson->end_time ?? '' }}
+                    {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
                 </td>
                 <td>
 
-                    <div class="table-actions">
+                    <div class="table-actions text-center">
                         @can('lesson_show')
                             <a href="{{ route('admin.lessons.show', $lesson->id) }}" data-toggle="tooltip" title="Show">
                                 <i class="ik ik-eye f-16 mr-15 text-blue"></i>
