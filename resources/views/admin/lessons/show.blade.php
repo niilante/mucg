@@ -77,7 +77,7 @@
                                                 {{ trans('cruds.lesson.fields.start_time') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->start_time }}
+                                                {{ date('h:i A', strtotime($lesson->start_time)) }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -85,7 +85,7 @@
                                                 {{ trans('cruds.lesson.fields.end_time') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->end_time }}
+                                                {{ date('h:i A', strtotime($lesson->end_time))}}
                                             </td>
                                         </tr>
                                     </tbody>
