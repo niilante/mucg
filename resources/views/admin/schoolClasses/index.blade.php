@@ -9,8 +9,8 @@
                     <div class="page-header-title">
                         <i class="ik ik-layers bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ trans('cruds.schoolClass.title_singular') }} {{ trans('global.list') }}</h5>
-                            <span>Registered School Classes with last updated on top</span>
+                            <h5>{{ trans('cruds.schoolClass.title') }} {{ trans('global.list') }}</h5>
+                            <span>Registered {{ trans('cruds.schoolClass.title') }} with last updated on top</span>
                         </div>
                     </div>
                 </div>

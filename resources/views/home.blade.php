@@ -57,7 +57,7 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Total No. of Lectures</h6>
+                                <h6>Total No. of Lecture Classes</h6>
                                 @if( $user_counts > 0)
                                     <h2>{{ $school_class_counts }}</h2>
                                 @else
@@ -80,8 +80,12 @@
                     <div class="widget-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
-                                <h6>Total No. of Shedules</h6>
-                                <h2>540</h2>
+                                <h6>Total No. of Lessons</h6>
+                                @if( $user_counts > 0)
+                                    <h2>{{ $lesson_counts }}</h2>
+                                @else
+                                    
+                                @endif
                             </div>
                             <div class="icon">
                                 <i class="ik ik-calendar"></i>
