@@ -13,3 +13,4 @@ yarn-error.log
 /.history
 /cache/files
 /cache/
+/public/.htaccess
