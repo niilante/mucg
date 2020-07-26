@@ -59,7 +59,7 @@
                 @endcan
 
                 @can('school_class_access')
-                    <div class="nav-lavel">Class Room</div>
+                    <div class="nav-lavel">Lecturer Classes</div>
                         <div class="nav-item">
                             <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
                                 <i class="ik ik-home"></i>

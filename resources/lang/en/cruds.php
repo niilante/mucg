@@ -93,8 +93,8 @@ return [
         ],
     ],
     'schoolClass'    => [
-        'title'          => 'School Classes',
-        'title_singular' => 'School Class',
+        'title'          => 'Lecture Classes',
+        'title_singular' => 'Lecture Class',
         'fields'         => [
             'id'                => 'ID #',
             'id_helper'         => '',
