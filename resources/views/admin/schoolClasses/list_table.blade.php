@@ -14,8 +14,9 @@
             <th>
                 Schedule
             </th>
-            <th>
-                &nbsp;
+            <th class="nosort text-right">
+                Action
+                {{-- &nbsp; --}}
             </th>
         </tr>
     </thead>
