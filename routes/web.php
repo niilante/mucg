@@ -1,6 +1,9 @@
 <?php
 
-Route::redirect('/', '/login');
+Route::get('/', function () {
+        return redirect(route('login'));
+    })->name('admin');
+
 Route::get(
     '/home',
     function () {
