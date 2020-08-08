@@ -63,10 +63,10 @@
                                 {{ $lesson->weekday ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->start_time ?? '' }}
+                                {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->end_time ?? '' }}
+                                {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
                             </td>
                             <td>
                                 @can('lesson_show')

@@ -1,4 +1,4 @@
-<div class="sidebar">
+{{-- <div class="sidebar">
     <nav class="sidebar-nav">
 
         <ul class="nav">
@@ -68,6 +68,7 @@
                     </ul>
                 </li>
             @endcan
+
             @can('school_class_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
@@ -78,6 +79,7 @@
                     </a>
                 </li>
             @endcan
+
             @can('lesson_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.lessons.index") }}" class="nav-link {{ request()->is('admin/lessons') || request()->is('admin/lessons/*') ? 'active' : '' }}">
@@ -88,6 +90,7 @@
                     </a>
                 </li>
             @endcan
+            
             <li class="nav-item">
                 <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-calendar nav-icon">
@@ -108,4 +111,6 @@
 
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-</div>
+</div> --}}
+
+

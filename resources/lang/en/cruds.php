@@ -9,7 +9,7 @@ return [
         'title'          => 'Permissions',
         'title_singular' => 'Permission',
         'fields'         => [
-            'id'                => 'ID',
+            'id'                => 'ID #',
             'id_helper'         => '',
             'title'             => 'Title',
             'title_helper'      => '',
@@ -25,7 +25,7 @@ return [
         'title'          => 'Roles',
         'title_singular' => 'Role',
         'fields'         => [
-            'id'                 => 'ID',
+            'id'                 => 'ID #',
             'id_helper'          => '',
             'title'              => 'Title',
             'title_helper'       => '',
@@ -43,7 +43,7 @@ return [
         'title'          => 'Users',
         'title_singular' => 'User',
         'fields'         => [
-            'id'                       => 'ID',
+            'id'                       => 'ID #',
             'id_helper'                => '',
             'name'                     => 'Name',
             'name_helper'              => '',
@@ -71,7 +71,7 @@ return [
         'title'          => 'Lessons',
         'title_singular' => 'Lesson',
         'fields'         => [
-            'id'                => 'ID',
+            'id'                => 'ID #',
             'id_helper'         => '',
             'teacher'           => 'Teacher',
             'teacher_helper'    => '',
@@ -89,13 +89,14 @@ return [
             'deleted_at_helper' => '',
             'class'             => 'Class',
             'class_helper'      => '',
+            'actions'      => 'Actions',
         ],
     ],
     'schoolClass'    => [
-        'title'          => 'School Classes',
-        'title_singular' => 'School Class',
+        'title'          => 'Lecture Classes',
+        'title_singular' => 'Lecture Class',
         'fields'         => [
-            'id'                => 'ID',
+            'id'                => 'ID #',
             'id_helper'         => '',
             'name'              => 'Name',
             'name_helper'       => '',

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="PHP_CodeSniffer">
-    <description>The coding standard for MUCG classroom scheduling and timetable.</description>
+    <description>The coding standard for MUCG.</description>
     <rule ref="PSR2"/>
 
     <file>app</file>
