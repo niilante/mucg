@@ -47,12 +47,12 @@
 
                     <div class="form-group">
                         <label class="required" for="weekday">{{ trans('cruds.lesson.fields.weekday') }}</label>
-                        <select class="form-control select2 {{ $errors->has('teacher') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
+                        <select class="form-control select2 {{ $errors->has('weekday') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
                             @foreach($weekDays as $index => $day)
                                 <option value="{{ $index }}" {{ old('weekday') == $day ? 'selected' : '' }}>{{ $day }}</option>
                             @endforeach
                         </select>
-                        @if($errors->has('teacher'))
+                        @if($errors->has('weekday'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('weekday') }}
                             </div>

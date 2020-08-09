@@ -40,9 +40,15 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.lesson.fields.teacher_helper') }}</span>
                     </div>
+
                     <div class="form-group">
                         <label class="required" for="weekday">{{ trans('cruds.lesson.fields.weekday') }}</label>
-                        <input class="form-control {{ $errors->has('weekday') ? 'is-invalid' : '' }}" type="number" name="weekday" id="weekday" value="{{ old('weekday', $lesson->weekday) }}" step="1" required>
+                        <?php $selected_weekday = old("weekday")? old("weekday"): $weekday;?>
+                        <select class="form-control select2 {{ $errors->has('weekday') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
+                            @foreach($weekDays as $index => $day)
+                                <option value="{{ $index }}" {{ $selected_weekday == $day ? 'selected' : '' }}>{{ $day }}</option>
+                            @endforeach
+                        </select>
                         @if($errors->has('weekday'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('weekday') }}
@@ -50,6 +56,7 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.lesson.fields.weekday_helper') }}</span>
                     </div>
+
                     <div class="form-group">
                         <label class="required" for="start_time">{{ trans('cruds.lesson.fields.start_time') }}</label>
                         <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="text" name="start_time" id="start_time" value="{{ old('start_time', $lesson->start_time) }}" required>
