@@ -10,9 +10,9 @@ class CalendarController extends Controller
 {
     public function index(CalendarService $calendarService)
     {
-        $weekDays     = Lesson::WEEK_DAYS;
-        $calendarData = $calendarService->generateCalendarData($weekDays);
+        $data['weekDays']     = Lesson::WEEK_DAYS;
+        $data['calendarData'] = $calendarService->generateCalendarData($data['weekDays']);
 
-        return view('admin.calendar', compact('weekDays', 'calendarData'));
+        return view('admin.calendar', $data);
     }
 }
