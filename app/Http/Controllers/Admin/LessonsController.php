@@ -47,7 +47,6 @@ class LessonsController extends Controller
 
         $data["weekname"] = $weekname;
         
-        // return $data;
         Lesson::create($data);
 
         return redirect()->route('admin.lessons.index');
@@ -57,18 +56,32 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['lesson'] = $lesson;
 
-        $teachers = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['weekday'] = $data["lesson"]->weekname;
 
-        $lesson->load('class', 'teacher');
+        $data['classes'] = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.lessons.edit', compact('classes', 'teachers', 'lesson'));
+        $data['weekDays'] = Lesson::WEEK_DAYS;
+
+        $data['teachers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $data['lesson']->load('class', 'teacher');
+
+        return view('admin.lessons.edit', $data);
     }
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        $lesson->update($request->all());
+        $data = $request->validated();
+        $weekday = $data["weekday"];
+        
+        $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
+        $weekname = ($type_str[$weekday]."day");
+
+        $data["weekname"] = $weekname;
+        
+        $data['lesson'] = $lesson->update($data);
 
         return redirect()->route('admin.lessons.index');
     }
@@ -98,23 +111,4 @@ class LessonsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-
-    // public function byWeekDay() 
-    // {
-    //     // $weekDays = array('1'=>'Monday', '2'=>'Tuesday', '3'=>'Wednesday', '4'=>'Thursday', '5'=>'Friday', '6'=>'Saturday', '7'=>'Sunday', ''=>null);
-    //     $weekDays = self::WEEK_DAYS;
-
-    //     foreach($weekDays as $index => $day) 
-    //     {          
-    //         self::CheckNumber($index, $day);                
-    //     }
-    // }
-
-    // public function CheckNumber($index, $day){         
-    //     if($day == '' || is_null($day)){    // add whatever condition you want to check     
-    //         echo 'Week day '.$index.' was not found';             
-    //     }else{              
-    //         echo $day;
-    //     }
-    // }
 }
