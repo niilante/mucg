@@ -27,7 +27,7 @@ class LessonsController extends Controller
     public function create()
     {
         abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $teachers = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -37,7 +37,21 @@ class LessonsController extends Controller
 
     public function store(StoreLessonRequest $request)
     {
-        $lesson = Lesson::create($request->all());
+        $data = $request->all();
+
+        $data['weekday'] = $data['weekday'];
+        
+        $data['weekname'] = Lesson::WEEK_DAYS;
+
+        if ($data['weekday'] == $data['weekname'])
+        {
+            return $data['weekname']->key;
+        }
+
+        // $data['weekname'];   
+
+        return $data;
+        $lesson = Lesson::create($data);
 
         return redirect()->route('admin.lessons.index');
     }
