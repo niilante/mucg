@@ -1,14 +1,17 @@
 {
   "name": "LHall",
+  "productName": "LectureHallScheduler",
+  "CompanyName": "Nn2J and Co Inc.",
+  "appCopyright": "Copyright © 2020 Nn2J and Co Inc. All rights reserved.",
   "version": "1.0.0",
-  "description": "A lecture hall scheduling system for schools mostly universities",
+  "description": "A lecture hall scheduling system developed by Richard Nii Lante Lawson, Dr Emmanuel Kitcher and Co.",
   "main": "main.js",
   "engines": {
     "node": ">=8.0"
   },
   "scripts": {
     "start": "electron .",
-    "build":"electron-packager . LectureHallScheduler --out=dist"
+    "build": "electron-packager . LectureHallScheduler --out=dist --platform=win32 --arch=x64"
   },
   "repository": {
     "type": "git",
@@ -23,10 +26,11 @@
   "authors": "Dr Emmanuel Kitcher, Richard Nii Lante Lawson and Co.",
   "license": "cc-by-4.0",
   "devDependencies": {
-    "electron": "^8.5.0",
-    "electron-packager": "^11.2.1"
+    "electron": "10.1.0",
+    "electron-packager": "15.1.0"
   },
   "dependencies": {
+    "internet-available": "^1.0.0",
     "node-php-server": "^0.1.2"
   },
   "bugs": {
