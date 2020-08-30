@@ -10,3 +10,10 @@ Making Laravel desktop application using Electron Js.
 - php 7.2
 - Laravel 6
 ### Check the complete tutorial and usage on [laravelarticle.com](https://laravelarticle.com/laravel-desktop-application-using-electron-js)
+
+<!-- DB Username: tupex@mailinator.com
+         and 
+     Password: qazwsxedc
+
+     Website: https://remotemysql.com/
+       -->
