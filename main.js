@@ -11,21 +11,30 @@ app.on('ready', () => {
 var phpServer = require('node-php-server');
 const port = 8000, host = '127.0.0.1';
 const serverUrl = `http://${host}:${port}`;
-
-
+var internetAvailable = require("internet-available");
+const text = `Kindly connect to internet and retry. Thank you`;
 let mainWindow
 
 function createWindow() {
-  // Create a PHP Server
-  phpServer.createServer({
-    port: port,
-    hostname: host,
-    base: `${__dirname}/www/public`,
-    keepalive: false,
-    open: false,
-    bin: `${__dirname}/php/php.exe`,
-    router: __dirname + '/www/server.php'
-  });
+
+  internetAvailable({
+    timeout: 3000,
+    retries: 10,
+      }).then(function(){
+        // Create a PHP Server
+        phpServer.createServer({
+          port: port,
+          hostname: host,
+          base: `${__dirname}/www/public`,
+          keepalive: false,
+          open: false,
+          bin: `${__dirname}/php/php.exe`,
+          router: __dirname + '/www/server.php'
+        });
+      }).catch(function(){
+          text
+      });
+    
 
   // Create the browser window.
   const nativeImage = require('electron').nativeImage;
