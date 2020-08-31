@@ -1,2 +1,2 @@
 web: vendor/bin/heroku-php-apache2 public/
-release: php artisan config:cache && php artisan clear-compiled && php artisan view:cache && php artisan migrate && php artisan db:seed --force
+release: php artisan config:cache && php artisan clear-compiled && php artisan view:cache --force
