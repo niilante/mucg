@@ -32,7 +32,7 @@
                     @endcan
                 </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -42,10 +42,10 @@
                                     <tbody>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.id') }}
+                                                {{ trans('cruds.lesson.fields.title') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->id }}
+                                                {{ $lesson->title }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -54,6 +54,14 @@
                                             </th>
                                             <td>
                                                 {{ $lesson->class->name ?? '' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lesson.fields.description') }}
+                                            </th>
+                                            <td>
+                                                {{ $lesson->description ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>
