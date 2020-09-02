@@ -15,3 +15,4 @@ yarn-error.log
 /cache/files
 /cache/
 /public/.htaccess
+composer.lock
