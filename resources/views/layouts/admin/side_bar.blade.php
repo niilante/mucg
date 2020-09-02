@@ -13,7 +13,7 @@
     <div class="sidebar-content">
         <div class="nav-container">
             <nav id="main-menu-navigation" class="navigation-main">
-                <div class="nav-lavel">Admin</div>
+            <div class="nav-lavel">{{ Auth::user()->role_name}}</div>
                 <div class="nav-item">
                     <a href="{{ route("admin.home") }}"><i class="ik ik-grid"></i><span>{{ trans('global.dashboard') }}</span></a>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="nav-item">
                     <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
                         <i class="ik ik-calendar"></i>
-                        Calendar
+                        Time table
                     </a>
                 </div>
             </nav>

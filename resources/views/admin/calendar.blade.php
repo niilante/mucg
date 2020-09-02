@@ -10,7 +10,7 @@
                     <div class="page-header-title">
                         <i class="ik ik-calendar bg-blue"></i>
                         <div class="d-inline">
-                            <h5>Calendar</h5>
+                            <h5>Time table</h5>
                             <span>Scheduled Time Table For The Calendar Week</span>
                         </div>
                     </div>
@@ -34,14 +34,14 @@
                     {{-- <div class="card-header">
                         Calendar
                     </div> --}}
-    
+
                     <div class="card-body">
                         @if(session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-    
+
                         <table class="table table-bordered">
                             <thead>
                                 <th width="125">Time</th>
@@ -59,7 +59,8 @@
                                             @if (is_array($value))
                                                 <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-center" style="background-color:#f0f0f0">
                                                     {{ $value['class_name'] }}<br>
-                                                    Teacher: {{ $value['teacher_name'] }}
+                                                    Teacher: {{ $value['teacher_name'] }} <br>
+                                                    Course Code: {{ $value['title'] }}
                                                 </td>
                                             @elseif ($value === 1)
                                                 <td></td>

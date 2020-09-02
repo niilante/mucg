@@ -6,7 +6,7 @@
 
             </th> --}}
             <th>
-                {{ trans('cruds.lesson.fields.id') }}
+                {{ trans('cruds.lesson.fields.title') }}
             </th>
             <th>
                 {{ trans('cruds.lesson.fields.class') }}
@@ -34,7 +34,7 @@
 
                 </td> --}}
                 <td>
-                    {{ $lesson->id ?? '' }}
+                    {{ $lesson->title ?? '' }}
                 </td>
                 <td>
                     {{ $lesson->class->name ?? '' }}
