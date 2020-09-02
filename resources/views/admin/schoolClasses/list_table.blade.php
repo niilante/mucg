@@ -11,8 +11,8 @@
             <th>
                 {{ trans('cruds.schoolClass.fields.name') }}
             </th>
-            <th>
-                Schedule
+            <th class="text-center">
+                Time Table
             </th>
             <th class="nosort text-right">
                 Action
@@ -32,9 +32,9 @@
                 <td>
                     {{ $schoolClass->name ?? '' }}
                 </td>
-                <td>
+                <td class="text-center">
                     <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">
-                        <button type="button" class="btn btn-primary btn-rounded">View Schedule</button>
+                        <button type="button" class="btn btn-primary btn-rounded">View Time Table</button>
                     </a>
                 </td>
                 <td>
