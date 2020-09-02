@@ -15,7 +15,8 @@ class CalendarService
             ->get();
 
         foreach ($timeRange as $time) {
-            $timeText = $time['start'] . ' - ' . $time['end'];
+
+            $timeText = ( date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
             $calendarData[$timeText] = [];
 
             foreach ($weekDays as $index => $day) {
@@ -25,6 +26,7 @@ class CalendarService
                     array_push($calendarData[$timeText], [
                         'class_name'   => $lesson->class->name,
                         'teacher_name' => $lesson->teacher->name,
+                        'title'        => $lesson->title,
                         'rowspan'      => $lesson->difference/30 ?? ''
                     ]);
                 } elseif (!$lessons->where('weekday', $index)->where('start_time', '<', $time['start'])->where('end_time', '>=', $time['end'])->count()) {
