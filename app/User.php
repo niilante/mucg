@@ -56,6 +56,21 @@ class User extends Authenticatable
         return $this->roles()->where('id', 4)->exists();
     }
 
+    public function getRoleNameAttribute()
+    {
+        if( $this->getIsAdminAttribute() == true){
+            return 'Admin';
+        } elseif ( $this->getIsStudentAttribute() == true ) {
+            return 'Student';
+        } else {
+            return 'Lecturer';
+        }
+
+        return '';
+    }
+
+
+
     public function teacherLessons()
     {
         return $this->hasMany(Lesson::class, 'teacher_id', 'id');
