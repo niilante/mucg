@@ -59,7 +59,7 @@
                 @endcan
 
                 @can('school_class_access')
-                    <div class="nav-lavel">Lecturer Classes</div>
+                    <div class="nav-lavel">Lecture Classes</div>
                         <div class="nav-item">
                             <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
                                 <i class="ik ik-home"></i>
@@ -88,6 +88,46 @@
                         <i class="ik ik-calendar"></i>
                         Time table
                     </a>
+                </div>
+
+                <div class="nav-lavel">Settings</div>
+                <div class="nav-item has-sub">
+                    <a href="javascript:void(0)" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
+                        <i class="ik ik-command"></i>
+                        Configurations
+                    </a>
+                    <div class="submenu-content">
+                        @can('permission_access')
+                            <a href="{{ route("admin.permissions.index") }}" class="menu-item {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
+                                <i class="ik ik-book"></i>
+                                Departments
+                            </a>
+                        @endcan
+
+                        @can('role_access')
+                            <a href="{{ route("admin.roles.index") }}" class="menu-item {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
+                                <i class="ik ik-award"></i>
+                                Ranks
+                            </a>
+                        @endcan
+
+                        @can('user_access')
+                            <a href="{{ route("admin.users.index") }}" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <i class="ik ik-bar-chart"></i>
+                                Lecture Halls
+                            </a>
+
+                            <a href="{{ route("admin.users.index") }}?role=3" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <i class="ik ik-watch"></i>
+                                Credit Hours
+                            </a>
+
+                            <a href="{{ route("admin.users.index") }}?role=4" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <i class="ik ik-briefcase"></i>
+                                Lecture Types
+                            </a>
+                        @endcan
+                    </div>
                 </div>
             </nav>
         </div>
