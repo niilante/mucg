@@ -67,6 +67,14 @@ return [
             'class_helper'             => '',
         ],
     ],
+    'lecturer' => [
+        'title'          => 'Lecturers',
+        'title_singular' => 'Lecturer',
+    ],
+    'student' => [
+        'title'          => 'Students',
+        'title_singular' => 'Student',
+    ],
     'lesson'         => [
         'title'          => 'Lessons',
         'title_singular' => 'Lesson',
@@ -75,6 +83,10 @@ return [
             'id_helper'         => '',
             'teacher'           => 'Lecturer',
             'teacher_helper'    => '',
+            'title'           => 'Title',
+            'title_helper'    => '',
+            'description'           => 'Description',
+            'description_helper'    => '',
             'weekday'           => 'Weekday',
             'title'             => 'Title',
             'description'       => 'Description',
