@@ -19,7 +19,7 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['lessons'] = Lesson::all();
+        $data['lessons'] = Lesson::orderBy('updated_at','DESC')->get();
 
         return view('admin.lessons.index', $data);
     }
@@ -29,7 +29,7 @@ class LessonsController extends Controller
         abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $data['classes'] = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        
+
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
         $data['teachers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -41,12 +41,13 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
         $weekday = $data["weekday"];
-        
+
         $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
         $weekname = ($type_str[$weekday]."day");
 
         $data["weekname"] = $weekname;
-        
+
+        // return $data;
         Lesson::create($data);
 
         return redirect()->route('admin.lessons.index');
@@ -75,12 +76,12 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
         $weekday = $data["weekday"];
-        
+
         $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
         $weekname = ($type_str[$weekday]."day");
 
         $data["weekname"] = $weekname;
-        
+
         $data['lesson'] = $lesson->update($data);
 
         return redirect()->route('admin.lessons.index');

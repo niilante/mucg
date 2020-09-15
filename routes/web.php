@@ -49,6 +49,7 @@ Route::group(
                 ->name('school-classes.massDestroy');
         Route::resource('school-classes', 'SchoolClassesController');
 
+        // School Classes
         Route::get('calendar', 'CalendarController@index')
                 ->name('calendar.index');
     }

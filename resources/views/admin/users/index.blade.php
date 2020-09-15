@@ -21,7 +21,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            
+
         </div>
     </div>
 </div>
@@ -52,10 +52,14 @@
                                         <i class="ik ik-plus-square"></i>
                                         {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
                                     </a>
-                                    <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?student">
+                                    {{-- <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?student">
                                         <i class="ik ik-plus-square"></i>
-                                        {{ trans('global.add') }} New Student
+                                        {{ trans('global.add') }} Add Student
                                     </a>
+                                    <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?teacher">
+                                        <i class="ik ik-plus-square"></i>
+                                        {{ trans('global.add') }} Add Lecturer
+                                    </a> --}}
                                     {{-- <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?teacher">
                                         <i class="ik ik-plus-square"></i>
                                         {{ trans('global.add') }} New Teacher

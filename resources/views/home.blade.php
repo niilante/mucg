@@ -1,5 +1,5 @@
 @extends('layouts.admin_app')
-
+@section('title', __('Dashboard'))
 @section('content')
 
 <div class="main-content">
@@ -11,7 +11,7 @@
                         <i class="ik ik-grid bg-blue"></i>
                         <div class="d-inline">
                             <h5>Dashboard</h5>
-                            <span>Admin Dashboard</span>
+                            <span>{{ Auth::user()->role_name}} Dashboard</span>
                         </div>
                     </div>
                 </div>

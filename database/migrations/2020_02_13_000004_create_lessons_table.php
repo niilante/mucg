@@ -13,7 +13,7 @@ class CreateLessonsTable extends Migration
                 $table->increments('id');
                 $table->integer('weekday');
                 $table->string('title');
-                $table->string('description');
+                $table->text('description');
                 $table->string('weekname');
                 $table->time('start_time');
                 $table->time('end_time');

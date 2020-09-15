@@ -20,6 +20,14 @@ class UpdateLessonRequest extends FormRequest
     public function rules()
     {
         return [
+            'title'   => [
+                'required',
+                'string',
+                'min:3'],
+            'description'   => [
+                'required',
+                'string',
+                'min:3'],
             'class_id'   => [
                 'required',
                 'integer'],
