@@ -16,3 +16,4 @@ yarn-error.log
 /cache/
 /public/.htaccess
 composer.lock
+/cache
