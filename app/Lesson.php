@@ -19,6 +19,8 @@ class Lesson extends Model
     ];
 
     protected $fillable = [
+        'title',
+        'description',
         'weekday',
         'weekname',
         'class_id',
