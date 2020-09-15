@@ -46,12 +46,12 @@
 
                                 <a href="{{ route("admin.users.index") }}?role=3" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
                                     <i class="ik ik-user"></i>
-                                    Teachers
+                                    {{ trans('cruds.lecturer.title') }}
                                 </a>
 
                                 <a href="{{ route("admin.users.index") }}?role=4" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
                                     <i class="ik ik-user"></i>
-                                    Students
+                                    {{ trans('cruds.student.title') }}
                                 </a>
                             @endcan
                         </div>
