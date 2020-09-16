@@ -1,9 +1,9 @@
 <?php
 
-use App\SchoolClass;
+use App\LectureClass;
 use Illuminate\Database\Seeder;
 
-class SchoolClassesTableSeeder extends Seeder
+class LectureClassesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,6 +27,6 @@ class SchoolClassesTableSeeder extends Seeder
             ]
         ];
 
-        SchoolClass::insert($classes);
+        LectureClass::insert($classes);
     }
 }
