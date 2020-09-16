@@ -30,7 +30,7 @@ class LessonTimeAvailabilityRule implements Rule
                 ->input('weekday'), $value, request()
                 ->input('end_time'), request()
                 ->input('class_id'), request()
-                ->input('teacher_id'), $this->lesson);
+                ->input('lecturer_id'), $this->lesson);
     }
 
     /**

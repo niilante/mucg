@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->roles()->where('id', 1)->exists();
     }
 
-    public function getIsTeacherAttribute()
+    public function getIsLeacherAttribute()
     {
         return $this->roles()->where('id', 3)->exists();
     }
@@ -71,9 +71,9 @@ class User extends Authenticatable
 
 
 
-    public function teacherLessons()
+    public function lecturerLessons()
     {
-        return $this->hasMany(Lesson::class, 'teacher_id', 'id');
+        return $this->hasMany(Lesson::class, 'lecturer_id', 'id');
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -105,11 +105,11 @@ class User extends Authenticatable
 
     function class()
     {
-        return $this->belongsTo(SchoolClass::class, 'class_id');
+        return $this->belongsTo(LectureClass::class, 'class_id');
     }
 
     function classes()
     {
-        return $this->belongsToMany(SchoolClass::class, 'class_id');
+        return $this->belongsToMany(LectureClass::class, 'class_id');
     }
 }

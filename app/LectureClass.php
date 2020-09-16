@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SchoolClass extends Model
+class LectureClass extends Model
 {
     use SoftDeletes;
 
-    public $table = 'school_classes';
+    public $table = 'lecture_classes';
 
     protected $dates = [
         'created_at',

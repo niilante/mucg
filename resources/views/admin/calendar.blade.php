@@ -60,7 +60,8 @@
                                                 <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-center" style="background-color:#f0f0f0">
                                                     {{ $value['class_name'] }}<br>
                                                     Course Code: {{ $value['title'] }}
-                                                    Lecturer: {{ $value['teacher_name'] }}
+                                                    {{-- Lecture Hall: {{ $value['title'] }} --}}
+                                                    Lecturer: {{ $value['lecturer_name'] }}
                                                 </td>
                                             @elseif ($value === 1)
                                                 <td></td>

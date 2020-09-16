@@ -56,13 +56,13 @@
                                         <i class="ik ik-plus-square"></i>
                                         {{ trans('global.add') }} Add Student
                                     </a>
-                                    <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?teacher">
+                                    <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?lecturer">
                                         <i class="ik ik-plus-square"></i>
                                         {{ trans('global.add') }} Add Lecturer
                                     </a> --}}
-                                    {{-- <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?teacher">
+                                    {{-- <a class="btn btn-outline-info" href="{{ route("admin.users.create") }}?lecturer">
                                         <i class="ik ik-plus-square"></i>
-                                        {{ trans('global.add') }} New Teacher
+                                        {{ trans('global.add') }} New Lecturer
                                     </a> --}}
                                 </div>
                             </nav>

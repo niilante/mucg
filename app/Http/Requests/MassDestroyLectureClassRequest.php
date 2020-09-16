@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\SchoolClass;
+use App\LectureClass;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroySchoolClassRequest extends FormRequest
+class MassDestroyLectureClassRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('school_class_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('lecture_class_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +20,7 @@ class MassDestroySchoolClassRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:school_classes,id',
+            'ids.*' => 'exists:lecture_classes,id',
         ];
     }
 }

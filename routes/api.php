@@ -15,7 +15,10 @@ Route::group(
         // Lessons
         Route::apiResource('lessons', 'LessonsApiController');
 
-        // School Classes
-        Route::apiResource('school-classes', 'SchoolClassesApiController');
+        // Department
+        Route::apiResource('department', 'DepartmentApiController');
+
+        // Lecture Classes
+        Route::apiResource('lecture-classes', 'LectureClassesApiController');
     }
 );

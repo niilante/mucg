@@ -9,18 +9,18 @@
                     <div class="page-header-title">
                         <i class="ik ik-layers bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ trans('cruds.schoolClass.title') }} {{ trans('global.list') }}</h5>
-                            <span>Registered {{ trans('cruds.schoolClass.title') }} with last updated on top</span>
+                            <h5>{{ trans('cruds.lectureClass.title') }} {{ trans('global.list') }}</h5>
+                            <span>Registered {{ trans('cruds.lectureClass.title') }} with last updated on top</span>
                         </div>
                     </div>
                 </div>
-                @can('school_class_create')
+                @can('lecture_class_create')
                     <div class="col-lg-4">
                         <nav class="breadcrumb-container" aria-label="breadcrumb">
                             <div>
-                                <a href="{{route('admin.school-classes.create')}}" class="btn btn-outline-info">
+                                <a href="{{route('admin.lecture-classes.create')}}" class="btn btn-outline-info">
                                     <i class="ik ik-plus-square"></i>
-                                    {{ trans('global.add') }} {{ trans('cruds.schoolClass.title_singular') }}
+                                    {{ trans('global.add') }} {{ trans('cruds.lectureClass.title_singular') }}
                                 </a>
                             </div>
                         </nav>
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="dt-responsive">
-                            @include('admin.schoolClasses.list_table')
+                            @include('admin.lectureClasses.list_table')
                         </div>
                     </div>
                 </div>
@@ -50,11 +50,11 @@
         <script>
             $(function () {
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-        @can('school_class_delete')
+        @can('lecture_class_delete')
         let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
         let deleteButton = {
             text: deleteButtonTrans,
-            url: "{{ route('admin.school-classes.massDestroy') }}",
+            url: "{{ route('admin.lecture-classes.massDestroy') }}",
             className: 'btn-danger',
             action: function (e, dt, node, config) {
             var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -84,7 +84,7 @@
             order: [[ 1, 'desc' ]],
             pageLength: 100,
         });
-        $('.datatable-SchoolClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+        $('.datatable-LectureClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();

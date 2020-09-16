@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.schoolClass.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.lectureClass.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.school-classes.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.lecture-classes.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,24 +17,24 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.schoolClass.fields.id') }}
+                            {{ trans('cruds.lectureClass.fields.id') }}
                         </th>
                         <td>
-                            {{ $schoolClass->id }}
+                            {{ $lectureClass->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.schoolClass.fields.name') }}
+                            {{ trans('cruds.lectureClass.fields.name') }}
                         </th>
                         <td>
-                            {{ $schoolClass->name }}
+                            {{ $lectureClass->name }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.school-classes.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.lecture-classes.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -60,10 +60,10 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="class_lessons">
-            @includeIf('admin.schoolClasses.relationships.classLessons', ['lessons' => $schoolClass->classLessons])
+            @includeIf('admin.lectureClasses.relationships.classLessons', ['lessons' => $lectureClass->classLessons])
         </div>
         <div class="tab-pane" role="tabpanel" id="class_users">
-            @includeIf('admin.schoolClasses.relationships.classUsers', ['users' => $schoolClass->classUsers])
+            @includeIf('admin.lectureClasses.relationships.classUsers', ['users' => $lectureClass->classUsers])
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyLessonRequest;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use App\Lesson;
-use App\SchoolClass;
+use App\LectureClass;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -28,11 +28,11 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['classes'] = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['classes'] = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
-        $data['teachers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['lecturers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.lessons.create', $data);
     }
@@ -61,13 +61,13 @@ class LessonsController extends Controller
 
         $data['weekday'] = $data["lesson"]->weekname;
 
-        $data['classes'] = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['classes'] = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
-        $data['teachers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['lecturers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $data['lesson']->load('class', 'teacher');
+        $data['lesson']->load('class', 'lecturer');
 
         return view('admin.lessons.edit', $data);
     }
@@ -91,7 +91,7 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $lesson->load('class', 'teacher');
+        $lesson->load('class', 'lecturer');
 
         return view('admin.lessons.show', compact('lesson'));
     }

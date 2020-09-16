@@ -8,7 +8,7 @@ Route::get(
     '/home',
     function () {
         $routeName = auth()->user() && (auth()->user()->is_student || auth()->
-                        user()->is_teacher) ? 'admin.calendar.index' : 'admin.home';
+                        user()->is_lecturer) ? 'admin.calendar.index' : 'admin.home';
         if (session('status')) {
             return redirect()->route($routeName)->with('status', session('status'));
         }
@@ -44,12 +44,22 @@ Route::group(
                 ->name('lessons.massDestroy');
         Route::resource('lessons', 'LessonsController');
 
-        // School Classes
-        Route::delete('school-classes/destroy', 'SchoolClassesController@massDestroy')
-                ->name('school-classes.massDestroy');
-        Route::resource('school-classes', 'SchoolClassesController');
+        // Departments
+        Route::delete('departments/destroy', 'DepartmentController@massDestroy')
+                ->name('departments.massDestroy');
+        Route::resource('departments', 'DepartmentController');
 
-        // School Classes
+        // Ranks
+        Route::delete('ranks/destroy', 'RankController@massDestroy')
+                ->name('ranks.massDestroy');
+        Route::resource('ranks', 'RankController');
+
+        // Lecture Classes (Group of People)
+        Route::delete('lecture-classes/destroy', 'LectureClassesController@massDestroy')
+                ->name('lecture-classes.massDestroy');
+        Route::resource('lecture-classes', 'LectureClassesController');
+
+        // Lecture Classes
         Route::get('calendar', 'CalendarController@index')
                 ->name('calendar.index');
     }

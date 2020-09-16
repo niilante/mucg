@@ -58,12 +58,12 @@
                     </div>
                 @endcan
 
-                @can('school_class_access')
+                @can('lecture_class_access')
                     <div class="nav-lavel">Lecture Classes</div>
                         <div class="nav-item">
-                            <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.lecture-classes.index") }}" class="nav-link {{ request()->is('admin/lecture-classes') || request()->is('admin/lecture-classes/*') ? 'active' : '' }}">
                                 <i class="ik ik-home"></i>
-                                {{ trans('cruds.schoolClass.title') }}
+                                {{ trans('cruds.lectureClass.title') }}
                             </a>
                         </div>
 
@@ -98,12 +98,12 @@
                             Configurations
                         </a>
                         <div class="submenu-content">
-                            <a href="{{ route("admin.permissions.index") }}" class="menu-item {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.departments.index") }}" class="menu-item {{ request()->is('admin/departments') || request()->is('admin/departments/*') ? 'active' : '' }}">
                                 <i class="ik ik-book"></i>
                                 Departments
                             </a>
 
-                            <a href="{{ route("admin.roles.index") }}" class="menu-item {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.ranks.index") }}" class="menu-item {{ request()->is('admin/ranks') || request()->is('admin/ranks/*') ? 'active' : '' }}">
                                 <i class="ik ik-award"></i>
                                 Ranks
                             </a>

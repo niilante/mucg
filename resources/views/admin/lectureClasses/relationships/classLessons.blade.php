@@ -101,14 +101,14 @@
                         </div>
                         <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="#teacher_lessons" role="tab" data-toggle="tab">
+                                <a class="nav-link" href="#lecturer_lessons" role="tab" data-toggle="tab">
                                     {{ trans('cruds.lesson.title') }}
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" role="tabpanel" id="teacher_lessons">
-                                @includeIf('admin.users.relationships.teacherLessons', ['lessons' => $user->teacherLessons])
+                            <div class="tab-pane" role="tabpanel" id="lecturer_lessons">
+                                @includeIf('admin.users.relationships.lecturerLessons', ['lessons' => $user->lecturerLessons])
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                     {{ trans('cruds.lesson.fields.class') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.lesson.fields.teacher') }}
+                                    {{ trans('cruds.lesson.fields.lecturer') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.lesson.fields.weekday') }}
@@ -181,7 +181,7 @@
                                         {{ $lesson->class->name ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $lesson->teacher->name ?? '' }}
+                                        {{ $lesson->lecturer->name ?? '' }}
                                     </td>
                                     <td>
                                         {{ $lesson->weekday ?? '' }}
