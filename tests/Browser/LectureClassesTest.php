@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class SchoolClassesTest extends DuskTestCase
+class LectureClassesTest extends DuskTestCase
 {
     public function testIndex()
     {
@@ -14,8 +14,8 @@ class SchoolClassesTest extends DuskTestCase
         $this->browse(
             function (Browser $browser) use ($admin) {
                 $browser->loginAs($admin);
-                $browser->visit(route('admin.school-classes.index'));
-                $browser->assertRouteIs('admin.school-classes.index');
+                $browser->visit(route('admin.lecture-classes.index'));
+                $browser->assertRouteIs('admin.lecture-classes.index');
             }
         );
     }
