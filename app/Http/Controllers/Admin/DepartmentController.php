@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Department;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller
 {
@@ -14,7 +15,11 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        // abort_if(Gate::denies('department_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $data['departments'] = Department::orderBy('updated_at','DESC')->get();
+
+        return view('admin.departments.index', $data);
     }
 
     /**

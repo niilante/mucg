@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
-use App\SchoolClass;
+use App\LectureClass;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -33,7 +33,7 @@ class UsersController extends Controller
             ->get();
 
         // return $data['users'];
-        // return $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        // return $classes = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.users.index', $data);
     }
@@ -44,7 +44,7 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $classes = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.users.create', compact('roles', 'classes'));
     }
@@ -63,7 +63,7 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $classes = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $user->load('roles', 'class');
 
@@ -82,7 +82,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'class', 'teacherLessons');
+        $user->load('roles', 'class', 'lecturerLessons');
 
         return view('admin.users.show', compact('user'));
     }
