@@ -25,7 +25,7 @@ class Lesson extends Model
         'weekname',
         'class_id',
         'end_time',
-        'teacher_id',
+        'lecturer_id',
         'start_time',
         'created_at',
         'updated_at',
@@ -75,23 +75,23 @@ class Lesson extends Model
 
     function class()
     {
-        return $this->belongsTo(SchoolClass::class, 'class_id');
+        return $this->belongsTo(LectureClass::class, 'class_id');
     }
 
-    public function teacher()
+    public function lecturer()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'lecturer_id');
     }
 
-    public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson)
+    public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $lecturer, $lesson)
     {
         $lessons = self::where('weekday', $weekday)
             ->when($lesson, function ($query) use ($lesson) {
                 $query->where('id', '!=', $lesson);
             })
-            ->where(function ($query) use ($class, $teacher) {
+            ->where(function ($query) use ($class, $lecturer) {
                 $query->where('class_id', $class)
-                    ->orWhere('teacher_id', $teacher);
+                    ->orWhere('lecturer_id', $lecturer);
             })
             ->where([
                 ['start_time', '<', $endTime],
@@ -105,8 +105,8 @@ class Lesson extends Model
     public function scopeCalendarByRoleOrClassId($query)
     {
         return $query->when(!request()->input('class_id'), function ($query) {
-            $query->when(auth()->user()->is_teacher, function ($query) {
-                $query->where('teacher_id', auth()->user()->id);
+            $query->when(auth()->user()->is_lecturer, function ($query) {
+                $query->where('lecturer_id', auth()->user()->id);
             })
                 ->when(auth()->user()->is_student, function ($query) {
                     $query->where('class_id', auth()->user()->class_id ?? '0');
