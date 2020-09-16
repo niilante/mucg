@@ -10,7 +10,8 @@
                     <div class="page-header-title">
                         <i class="ik ik-layers bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ trans('global.show') }} {{ trans('cruds.user.title') }}</h5>
+                            <h5>{{ trans('global.show') }} {{ trans('cruds.user.title_singular') }}</h5>
+                            <span>{{ trans('cruds.user.title_singular') }} Details</span>
                         </div>
                     </div>
                 </div>
@@ -34,181 +35,41 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-4 col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dt-responsive">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.id') }}
-                                        </th>
-                                        <td>
-                                            {{ $user->id }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.name') }}
-                                        </th>
-                                        <td>
-                                            {{ $user->name }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.email') }}
-                                        </th>
-                                        <td>
-                                            {{ $user->email }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.email_verified_at') }}
-                                        </th>
-                                        <td>
-                                            {{ $user->email_verified_at }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.roles') }}
-                                        </th>
-                                        <td>
-                                            @foreach($user->roles as $key => $roles)
-                                                <span class="label label-info">{{ $roles->title }}</span>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            {{ trans('cruds.user.fields.class') }}
-                                        </th>
-                                        <td>
-                                            {{ $user->class->name ?? '' }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <small class="text-muted d-block pt-10">{{ trans('cruds.user.fields.id') }}</small>
+                        <h5>{{ $user->id }}</h5>
+                        <small class="text-muted d-block pt-10">{{ trans('cruds.user.fields.name') }}</small>
+                        <h5>{{ $user->name }}</h5>
                     </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            {{ trans('global.relatedData') }}
-                        </div>
-                        <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#teacher_lessons" role="tab" data-toggle="tab">
-                                    {{ trans('cruds.lesson.title') }}
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" role="tabpanel" id="teacher_lessons">
-                                @includeIf('admin.users.relationships.teacherLessons', ['lessons' => $user->teacherLessons])
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="card">
+                    <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#lecturer_lessons" role="tab" aria-controls="pills-timeline" aria-selected="true">{{ trans('cruds.lesson.title') }}</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#last-month" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#previous-month" role="tab" aria-controls="pills-setting" aria-selected="false">Setting</a>
+                        </li> --}}
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade active show" id="lecturer_lessons" role="tabpanel" aria-labelledby="pills-timeline-tab">
+                            <div class="card-body">
+                                @includeIf('admin.users.relationships.lecturerLessons', ['lessons' => $user->lecturerLessons])
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-
-{{-- <div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.user.title') }}
-    </div>
-
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.users.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $user->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $user->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.email') }}
-                        </th>
-                        <td>
-                            {{ $user->email }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
-                        </th>
-                        <td>
-                            {{ $user->email_verified_at }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.roles') }}
-                        </th>
-                        <td>
-                            @foreach($user->roles as $key => $roles)
-                                <span class="label label-info">{{ $roles->title }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.class') }}
-                        </th>
-                        <td>
-                            {{ $user->class->name ?? '' }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.users.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#teacher_lessons" role="tab" data-toggle="tab">
-                {{ trans('cruds.lesson.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="teacher_lessons">
-            @includeIf('admin.users.relationships.teacherLessons', ['lessons' => $user->teacherLessons])
-        </div>
-    </div>
-</div> --}}
 
 @endsection
