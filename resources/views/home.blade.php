@@ -37,7 +37,7 @@
 
                                 @if( $user_counts > 0)
                                     <h2>{{ $user_counts }}</h2>
-                                @else 
+                                @else
                                 @endif
 
                             </div>
@@ -59,9 +59,9 @@
                             <div class="state">
                                 <h6>Total No. of Lecture Classes</h6>
                                 @if( $user_counts > 0)
-                                    <h2>{{ $school_class_counts }}</h2>
+                                    <h2>{{ $lecture_class_counts }}</h2>
                                 @else
-                                    
+
                                 @endif
                             </div>
                             <div class="icon">
@@ -84,7 +84,7 @@
                                 @if( $user_counts > 0)
                                     <h2>{{ $lesson_counts }}</h2>
                                 @else
-                                    
+
                                 @endif
                             </div>
                             <div class="icon">

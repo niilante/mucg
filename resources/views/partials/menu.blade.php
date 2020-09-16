@@ -53,7 +53,7 @@
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
-                                    Teachers
+                                    Lecturers
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -69,13 +69,13 @@
                 </li>
             @endcan
 
-            @can('school_class_access')
+            @can('lecture_class_access')
                 <li class="nav-item">
-                    <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.lecture-classes.index") }}" class="nav-link {{ request()->is('admin/lecture-classes') || request()->is('admin/lecture-classes/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-school nav-icon">
 
                         </i>
-                        {{ trans('cruds.schoolClass.title') }}
+                        {{ trans('cruds.lectureClass.title') }}
                     </a>
                 </li>
             @endcan
@@ -90,7 +90,7 @@
                     </a>
                 </li>
             @endcan
-            
+
             <li class="nav-item">
                 <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-calendar nav-icon">
