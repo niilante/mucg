@@ -66,10 +66,10 @@
                                         </tr>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.teacher') }}
+                                                {{ trans('cruds.lesson.fields.lecturer') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->teacher->name ?? '' }}
+                                                {{ $lesson->lecturer->name ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>

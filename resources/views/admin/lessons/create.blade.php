@@ -53,18 +53,18 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="required" for="teacher_id">{{ trans('cruds.lesson.fields.teacher') }}</label>
-                                <select class="form-control select2 {{ $errors->has('teacher') ? 'is-invalid' : '' }}" name="teacher_id" id="teacher_id" required>
-                                    @foreach($teachers as $id => $teacher)
-                                        <option value="{{ $id }}" {{ old('teacher_id') == $id ? 'selected' : '' }}>{{ $teacher }}</option>
+                                <label class="required" for="lecturer_id">{{ trans('cruds.lesson.fields.lecturer') }}</label>
+                                <select class="form-control select2 {{ $errors->has('lecturer') ? 'is-invalid' : '' }}" name="lecturer_id" id="lecturer_id" required>
+                                    @foreach($lecturers as $id => $lecturer)
+                                        <option value="{{ $id }}" {{ old('lecturer_id') == $id ? 'selected' : '' }}>{{ $lecturer }}</option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('teacher'))
+                                @if($errors->has('lecturer'))
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('teacher') }}
+                                        {{ $errors->first('lecturer') }}
                                     </div>
                                 @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.teacher_helper') }}</span>
+                                <span class="help-block">{{ trans('cruds.lesson.fields.lecturer_helper') }}</span>
                             </div>
 
                             {{-- @foreach( $errors->all() as $error)
