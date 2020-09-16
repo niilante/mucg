@@ -10,7 +10,7 @@ class CalendarService
     {
         $calendarData = [];
         $timeRange = (new TimeService)->generateTimeRange(config('app.calendar.start_time'), config('app.calendar.end_time'));
-        $lessons   = Lesson::with('class', 'teacher')
+        $lessons   = Lesson::with('class', 'lecturer')
             ->calendarByRoleOrClassId()
             ->get();
 
@@ -25,7 +25,7 @@ class CalendarService
                 if ($lesson) {
                     array_push($calendarData[$timeText], [
                         'class_name'   => $lesson->class->name,
-                        'teacher_name' => $lesson->teacher->name,
+                        'lecturer_name' => $lesson->lecturer->name,
                         'title'        => $lesson->title,
                         'rowspan'      => $lesson->difference/30 ?? ''
                     ]);
