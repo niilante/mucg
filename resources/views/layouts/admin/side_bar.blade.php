@@ -113,14 +113,18 @@
                                 {{ trans('cruds.lectureHall.title') }}
                             </a>
 
-                            <a href="{{ route("admin.users.index") }}?role=3" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.lecture-hall-resources.index") }}" class="menu-item {{ request()->is('admin/lecture-hall-resources') || request()->is('admin/lecture-hall-resources/*') ? 'active' : '' }}">
                                 <i class="ik ik-watch"></i>
-                                Credit Hours
+                                {{ trans('cruds.lectureHallResource.title') }}
                             </a>
 
-                            <a href="{{ route("admin.users.index") }}?role=4" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.lecture-type.index") }}" class="menu-item {{ request()->is('admin/lecture-type') || request()->is('admin/lecture-type/*') ? 'active' : '' }}">
                                 <i class="ik ik-briefcase"></i>
-                                Lecture Types
+                                {{ trans('cruds.lectureType.title') }}
+                            </a>
+                            <a href="{{ route("admin.position.index") }}" class="menu-item {{ request()->is('admin/position') || request()->is('admin/position/*') ? 'active' : '' }}">
+                                <i class="ik ik-briefcase"></i>
+                                {{ trans('cruds.position.title') }}
                             </a>
                         </div>
                     </div>
