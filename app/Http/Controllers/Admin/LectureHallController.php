@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Rank;
+use App\LectureHall;
 use Illuminate\Http\Request;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
 
-class RankController extends Controller
+class LectureHallController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +17,11 @@ class RankController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('rank_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('lecture_hall_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['ranks'] = Rank::orderBy('updated_at','DESC')->get();
+        $data['lectureHalls'] = LectureHall::orderBy('updated_at','DESC')->get();
 
-        return view('admin.ranks.index', $data);
+        return view('admin.lectureHalls.index', $data);
     }
 
     /**
@@ -48,39 +48,39 @@ class RankController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Rank  $rank
+     * @param  \App\LectureHall  $lectureHall
      * @return \Illuminate\Http\Response
      */
-    public function show(Rank $rank)
+    public function show(LectureHall $lectureHall)
     {
-        abort_if(Gate::denies('rank_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('lecture_hall_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['rank'] = $rank;
+        $data['LectureHall'] = $LectureHall;
 
-        return view('admin.ranks.show', $data);
+        return view('admin.lectureHalls.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rank  $rank
+     * @param  \App\LectureHall  $lectureHall
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rank $rank)
+    public function edit(LectureHall $lectureHall)
     {
-        $data['rank'] = $rank;
+        $data['LectureHall'] = $LectureHall;
 
-        return view('admin.ranks.edit', $data);
+        return view('admin.lectureHalls.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rank  $rank
+     * @param  \App\LectureHall  $lectureHall
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rank $rank)
+    public function update(Request $request, LectureHall $lectureHall)
     {
         //
     }
@@ -88,10 +88,10 @@ class RankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Rank  $rank
+     * @param  \App\LectureHall  $lectureHall
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rank $rank)
+    public function destroy(LectureHall $lectureHall)
     {
         //
     }
