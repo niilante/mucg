@@ -9,22 +9,22 @@
                         <div class="page-header-title">
                             <i class="ik ik-layers bg-blue"></i>
                             <div class="d-inline">
-                                <h5>{{ trans('cruds.lesson.title_singular') }}</h5>
-                            <span>{{$lesson->class->name ?? ''}} details</span>
+                                <h5>{{ trans('cruds.department.title_singular') }}</h5>
+                            <span>{{$department->name ?? ''}} details</span>
                             </div>
                         </div>
                     </div>
-                    @can('lesson_edit')
+                    @can('department_edit')
                         <div class="col-lg-4">
                             <nav class="breadcrumb-container" aria-label="breadcrumb">
                                 <div>
-                                    <a href="{{route('admin.lessons.edit', $lesson->id)}}" class="btn btn-outline-secondary">
+                                    <a href="{{route('admin.departments.edit', ['department' => $department])}}" class="btn btn-outline-secondary">
                                         <i class="ik ik-edit-2"></i>
-                                        {{ trans('global.edit') }} {{ trans('cruds.lesson.title_singular') }}
+                                        {{ trans('global.edit') }} {{ trans('cruds.department.title_singular') }}
                                     </a>
-                                    <a href="{{route('admin.lessons.index')}}" class="btn btn-outline-info">
+                                    <a href="{{route('admin.departments.index')}}" class="btn btn-outline-info">
                                         <i class="ik ik-list"></i>
-                                        {{ trans('global.view') }} Lessons
+                                        {{ trans('global.view') }} departments
                                     </a>
                                 </div>
                             </nav>
@@ -42,60 +42,29 @@
                                     <tbody>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.title') }}
+                                                {{ trans('cruds.department.fields.name') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->title }}
+                                                {{ $department->name }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.class') }}
+                                                {{ trans('cruds.department.fields.code') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->class->name ?? '' }}
+                                                {{ $department->code ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.description') }}
+                                                {{ trans('cruds.department.fields.description') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->description ?? '' }}
+                                                {{ $department->description ?? '' }}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.lesson.fields.lecturer') }}
-                                            </th>
-                                            <td>
-                                                {{ $lesson->lecturer->name ?? '' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.lesson.fields.weekday') }}
-                                            </th>
-                                            <td>
-                                                {{ $lesson->weekname }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.lesson.fields.start_time') }}
-                                            </th>
-                                            <td>
-                                                {{ date('h:i A', strtotime($lesson->start_time)) }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.lesson.fields.end_time') }}
-                                            </th>
-                                            <td>
-                                                {{ date('h:i A', strtotime($lesson->end_time))}}
-                                            </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>

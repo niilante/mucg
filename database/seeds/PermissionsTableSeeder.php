@@ -112,6 +112,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '26',
                 'title' => 'lecture_class_access',
             ],
+            [
+                'id'    => '27',
+                'title' => 'department_create',
+            ],
+            [
+                'id'    => '28',
+                'title' => 'department_edit',
+            ],
+            [
+                'id'    => '29',
+                'title' => 'department_show',
+            ],
+            [
+                'id'    => '30',
+                'title' => 'department_delete',
+            ],
+            [
+                'id'    => '31',
+                'title' => 'department_access',
+            ],
         ];
 
         Permission::insert($permissions);
