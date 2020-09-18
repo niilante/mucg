@@ -30,22 +30,22 @@
                 </td>
 
                 <td>
-                    {{ $department->code ?? '' }}
+                    {{ $department->description ?? '' }}
                 </td>
 
                 <td>
-                    {{ $department->description ?? '' }}
+                    {{ $department->code ?? '' }}
                 </td>
                 <td>
 
                     <div class="table-actions text-center">
                         @can('department_show')
-                            <a href="{{ route('admin.departments.show', $department->id) }}" data-toggle="tooltip" title="Show">
+                            <a href="{{ route('admin.departments.show', ['department' => $department]) }}" data-toggle="tooltip" title="Show">
                                 <i class="ik ik-eye f-16 mr-15 text-blue"></i>
                             </a>
                         @endcan
                         @can('department_edit')
-                            <a href="{{ route('admin.departments.edit', $department->id) }}" data-toggle="tooltip" title="Edit">
+                            <a href="{{ route('admin.departments.edit', ['department' => $department]) }}" data-toggle="tooltip" title="Edit">
                                 <i class="ik ik-edit-2 f-16 mr-15 text-green"></i>
                             </a>
                         @endcan
