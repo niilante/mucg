@@ -100,17 +100,17 @@
                         <div class="submenu-content">
                             <a href="{{ route("admin.departments.index") }}" class="menu-item {{ request()->is('admin/departments') || request()->is('admin/departments/*') ? 'active' : '' }}">
                                 <i class="ik ik-book"></i>
-                                Departments
+                                {{ trans('cruds.department.title') }}
                             </a>
 
                             <a href="{{ route("admin.ranks.index") }}" class="menu-item {{ request()->is('admin/ranks') || request()->is('admin/ranks/*') ? 'active' : '' }}">
                                 <i class="ik ik-award"></i>
-                                Ranks
+                                {{ trans('cruds.rank.title') }}
                             </a>
 
-                            <a href="{{ route("admin.users.index") }}" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.lecture-halls.index") }}" class="menu-item {{ request()->is('admin/lecture-halls') || request()->is('admin/lecture-halls/*') ? 'active' : '' }}">
                                 <i class="ik ik-bar-chart"></i>
-                                Lecture Halls
+                                {{ trans('cruds.lectureHall.title') }}
                             </a>
 
                             <a href="{{ route("admin.users.index") }}?role=3" class="menu-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
