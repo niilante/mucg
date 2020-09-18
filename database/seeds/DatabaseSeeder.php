@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             LessonsTableSeeder::class,
             DepartmentTableSeeder::class,
+            RankTableSeeder::class,
+            LectureHallTableSeeder::class,
+            LectureHallResourceTableSeeder::class,
+            LectureTypeTableSeeder::class,
+            PositionTableSeeder::class,
             ]
         );
     }
