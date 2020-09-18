@@ -118,11 +118,11 @@
                                 {{ trans('cruds.lectureHallResource.title') }}
                             </a>
 
-                            <a href="{{ route("admin.lecture-type.index") }}" class="menu-item {{ request()->is('admin/lecture-type') || request()->is('admin/lecture-type/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.lecture-types.index") }}" class="menu-item {{ request()->is('admin/lecture-type') || request()->is('admin/lecture-type/*') ? 'active' : '' }}">
                                 <i class="ik ik-briefcase"></i>
                                 {{ trans('cruds.lectureType.title') }}
                             </a>
-                            <a href="{{ route("admin.position.index") }}" class="menu-item {{ request()->is('admin/position') || request()->is('admin/position/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.positions.index") }}" class="menu-item {{ request()->is('admin/position') || request()->is('admin/position/*') ? 'active' : '' }}">
                                 <i class="ik ik-briefcase"></i>
                                 {{ trans('cruds.position.title') }}
                             </a>
