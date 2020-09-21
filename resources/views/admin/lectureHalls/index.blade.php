@@ -1,5 +1,5 @@
 @extends('layouts.admin_datatable')
-@section('title', __('All School Classes'))
+@section('title', __('All Lecture Halls'))
 @section('content')
 <div class="main-content">
     <div class="container-fluid">
@@ -9,8 +9,8 @@
                     <div class="page-header-title">
                         <i class="ik ik-layers bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ trans('cruds.lectureClass.title') }} {{ trans('global.list') }}</h5>
-                            <span>Registered {{ trans('cruds.lectureClass.title') }} with last updated on top</span>
+                            <h5>{{ trans('cruds.lectureHall.title') }} {{ trans('global.list') }}</h5>
+                            <span>Registered {{ trans('cruds.lectureHall.title') }} with last updated on top</span>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                             <div>
                                 <a href="{{route('admin.lecture-classes.create')}}" class="btn btn-outline-info">
                                     <i class="ik ik-plus-square"></i>
-                                    {{ trans('global.add') }} {{ trans('cruds.lectureClass.title_singular') }}
+                                    {{ trans('global.add') }} {{ trans('cruds.lectureHall.title_singular') }}
                                 </a>
                             </div>
                         </nav>
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="dt-responsive">
-                            @include('admin.lectureClasses.list_table')
+                            @include('admin.lectureHalls.list_table')
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
             order: [[ 1, 'desc' ]],
             pageLength: 100,
         });
-        $('.datatable-LectureClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+        $('.datatable-lectureHall:not(.ajaxTable)').DataTable({ buttons: dtButtons })
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();
