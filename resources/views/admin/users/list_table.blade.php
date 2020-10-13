@@ -16,11 +16,12 @@
             <th>
                 {{ trans('cruds.user.fields.roles') }}
             </th>
-            <th>
+            {{-- <th>
                 {{ trans('cruds.user.fields.class') }}
-            </th>
+            </th> --}}
             <th class="nosort" >
-                &nbsp;
+                {{-- &nbsp; --}}
+                Actions
             </th>
         </tr>
     </thead>
@@ -44,9 +45,9 @@
                         <label class="badge badge-info">{{ $item->title }}</label>
                     @endforeach
                 </td>
-                <td>
+                {{-- <td>
                     {{ $user->class ? $user->class->name : '' }}
-                </td>
+                </td> --}}
                 <td>
                     @can('user_show')
                             <a href="{{ route('admin.users.show', $user->id) }}" data-toggle="tooltip" title="Show">
