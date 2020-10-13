@@ -58,9 +58,9 @@ class User extends Authenticatable
 
     public function getRoleNameAttribute()
     {
-        if( $this->getIsAdminAttribute() == true){
+        if ($this->getIsAdminAttribute() == true) {
             return 'Admin';
-        } elseif ( $this->getIsStudentAttribute() == true ) {
+        } elseif ($this->getIsStudentAttribute() == true) {
             return 'Student';
         } else {
             return 'Lecturer';
@@ -103,12 +103,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    function class()
+    public function class()
     {
         return $this->belongsTo(LectureClass::class, 'class_id');
     }
 
-    function classes()
+    public function classes()
     {
         return $this->belongsToMany(LectureClass::class, 'class_id');
     }
