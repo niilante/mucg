@@ -9,9 +9,11 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create(
-            'users', function (Blueprint $table) {
+            'users',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
+                // $table->integer('class_id')->nullable();
                 $table->string('img_url', 256)->default('public/assets/img/users/user.png');
                 $table->string('email')->unique();
                 $table->datetime('email_verified_at')->nullable();
