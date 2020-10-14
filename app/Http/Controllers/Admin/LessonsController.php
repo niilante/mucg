@@ -19,7 +19,7 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['lessons'] = Lesson::orderBy('updated_at','DESC')->get();
+        $data['lessons'] = Lesson::orderBy('updated_at', 'DESC')->get();
 
         return view('admin.lessons.index', $data);
     }
@@ -65,7 +65,7 @@ class LessonsController extends Controller
 
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
-        $data['lecturers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $data['lesson']->load('class', 'lecturer');
 
@@ -91,9 +91,14 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $lesson->load('class', 'lecturer');
+        $lesson->load('lecturer', 'class');
+        $lesson_lecturer = $lesson->load('lecturer');
+        $lesson_class = $lesson->load('class');
+        $lecturer = $lesson_lecturer->lecturer;
+        $data['lecturer_cd'] = User::findOrFail($lesson_lecturer->lecturer->id);
+        // return $data['lecturer'] = User::where('lecturer_id', $lesson_lecturer->id)->get();
 
-        return view('admin.lessons.show', compact('lesson'));
+        return view('admin.lessons.show', $data, compact('lesson'));
     }
 
     public function destroy(Lesson $lesson)
@@ -111,5 +116,4 @@ class LessonsController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
-
 }

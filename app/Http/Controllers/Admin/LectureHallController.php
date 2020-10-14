@@ -19,7 +19,7 @@ class LectureHallController extends Controller
     {
         abort_if(Gate::denies('lecture_hall_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['lectureHalls'] = LectureHall::orderBy('updated_at','DESC')->get();
+        $data['lectureHalls'] = LectureHall::orderBy('updated_at', 'DESC')->get();
 
         return view('admin.lectureHalls.index', $data);
     }
@@ -53,9 +53,10 @@ class LectureHallController extends Controller
      */
     public function show(LectureHall $lectureHall)
     {
+        $lectureHall;
         abort_if(Gate::denies('lecture_hall_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['LectureHall'] = $LectureHall;
+        $data['lectureHall'] = $lectureHall;
 
         return view('admin.lectureHalls.show', $data);
     }
@@ -68,7 +69,7 @@ class LectureHallController extends Controller
      */
     public function edit(LectureHall $lectureHall)
     {
-        $data['LectureHall'] = $LectureHall;
+        $data['lectureHall'] = $lectureHall;
 
         return view('admin.lectureHalls.edit', $data);
     }
