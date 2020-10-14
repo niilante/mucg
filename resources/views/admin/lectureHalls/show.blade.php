@@ -1,71 +1,86 @@
 @extends('layouts.admin')
+@section('title', __('Show Lecture Hall'))
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.lectureClass.title') }}
-    </div>
-
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.lecture-classes.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="row align-items-end">
+                    <div class="col-lg-8">
+                        <div class="page-header-title">
+                            <i class="ik ik-layers bg-blue"></i>
+                            <div class="d-inline">
+                                <h5>{{ trans('cruds.lectureHall.title_singular') }}</h5>
+                            <span>{{$lectureHall->name }} details</span>
+                            </div>
+                        </div>
+                    </div>
+                    @can('lesson_edit')
+                        <div class="col-lg-4">
+                            <nav class="breadcrumb-container" aria-label="breadcrumb">
+                                <div>
+                                    <a href="{{route('admin.lecture-halls.edit', $lectureHall)}}" class="btn btn-outline-secondary">
+                                        <i class="ik ik-edit-2"></i>
+                                        {{ trans('global.edit') }} {{ trans('cruds.lectureHall.title_singular') }}
+                                    </a>
+                                    <a href="{{route('admin.lecture-halls.index')}}" class="btn btn-outline-info">
+                                        <i class="ik ik-list"></i>
+                                        {{ trans('global.view') }} Lecture Halls
+                                    </a>
+                                </div>
+                            </nav>
+                        </div>
+                    @endcan
+                </div>
             </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.lectureClass.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $lectureClass->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.lectureClass.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $lectureClass->name }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.lecture-classes.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lectureHall.fields.name') }}
+                                            </th>
+                                            <td>
+                                                {{ $lectureHall->name }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lectureHall.fields.code') }}
+                                            </th>
+                                            <td>
+                                                {{ $lectureHall->code }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lectureHall.fields.description') }}
+                                            </th>
+                                            <td>
+                                                {{ $lectureHall->description ?? '' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lectureHall.fields.capacity') }}
+                                            </th>
+                                            <td>
+                                                {{ $lectureHall->capacity }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#class_lessons" role="tab" data-toggle="tab">
-                {{ trans('cruds.lesson.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#class_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="class_lessons">
-            @includeIf('admin.lectureClasses.relationships.classLessons', ['lessons' => $lectureClass->classLessons])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="class_users">
-            @includeIf('admin.lectureClasses.relationships.classUsers', ['users' => $lectureClass->classUsers])
-        </div>
-    </div>
-</div>
 
 @endsection

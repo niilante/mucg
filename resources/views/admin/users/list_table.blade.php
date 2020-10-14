@@ -35,7 +35,7 @@
                     {{ $user->id ?? '' }}
                 </td>
                 <td>
-                    {{ $user->name ?? '' }}
+                    {{ $user->fname ?? '' }}
                 </td>
                 <td>
                     {{ $user->email ?? '' }}

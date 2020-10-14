@@ -45,6 +45,8 @@
                     </div>
                 </div>
             </div>
+            {{-- {{ $user->getIsAdmin() }} --}}
+            @if( $user->getIsLecturer() || $user->getIsStudent())
             <div class="col-lg-8 col-md-7">
                 <div class="card">
                     <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
@@ -74,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
 
     </div>

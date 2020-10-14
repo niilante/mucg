@@ -33,12 +33,12 @@
 
                     <div class="table-actions">
                         @can('lecture_class_show')
-                            <a href="{{ route('admin.lecture-classes.show', $lectureHall->id) }}"data-toggle="tooltip" title="Show">
+                            <a href="{{ route('admin.lecture-halls.show', $lectureHall) }}"data-toggle="tooltip" title="Show">
                                 <i class="ik ik-eye f-16 mr-15 text-blue"></i>
                             </a>
                         @endcan
                         @can('lecture_class_edit')
-                        <a href="{{ route('admin.lecture-classes.edit', $lectureHall->id) }}" data-toggle="tooltip" title="Edit">
+                        <a href="{{ route('admin.lecture-halls.edit', $lectureHall) }}" data-toggle="tooltip" title="Edit">
                                 <i class="ik ik-edit-2 f-16 mr-15 text-green"></i>
                             </a>
                         @endcan

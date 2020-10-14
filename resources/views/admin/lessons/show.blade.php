@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', __('Show Lesson'))
 @section('content')
 
     <div class="main-content">
@@ -69,7 +70,7 @@
                                                 {{ trans('cruds.lesson.fields.lecturer') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->lecturer->name ?? '' }}
+                                                {{ $lesson->lecturer->fname ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>
