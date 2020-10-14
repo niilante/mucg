@@ -164,7 +164,7 @@
                                     {{ trans('cruds.lesson.fields.end_time') }}
                                 </th>
                                 <th>
-                                    &nbsp;
+                                    Action{{-- &nbsp; --}}
                                 </th>
                             </tr>
                         </thead>
@@ -181,10 +181,10 @@
                                         {{ $lesson->class->name ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $lesson->lecturer->name ?? '' }}
+                                        {{ $lesson->lecturer->fname ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $lesson->weekday ?? '' }}
+                                        {{ $lesson->weekname ?? '' }}
                                     </td>
                                     <td>
                                         {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}

@@ -1,4 +1,4 @@
-@can('lesson_create')
+{{-- @can('lesson_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("admin.lessons.create") }}">
@@ -6,15 +6,16 @@
             </a>
         </div>
     </div>
-@endcan
+@endcan --}}
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.lesson.title_singular') }} {{ trans('global.list') }}
+        Time Table
+        {{-- {{ trans('cruds.lesson.title_singular') }} {{ trans('global.list') }} --}}
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
+        {{-- <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Lesson">
                 <thead>
                     <tr>
@@ -95,7 +96,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </div> --}}
     </div>
 </div>
 
