@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
                 $table->integer('gender_id')->unsigned()->index();
                 $table->string('dob')->nullable();
                 $table->string('phone', 13)->nullable();
-                $table->integer('added_by_id')->nullable();
-                $table->integer('department_id')->nullable();
+                $table->integer('added_by_id')->unsigned()->index();
+                $table->integer('department_id')->unsigned()->index();
                 // $table->integer('class_id')->nullable();
                 $table->text('bio')->nullable();
                 $table->string('img_url', 256)->default('public/assets/img/users/user.png');
