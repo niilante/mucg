@@ -46,12 +46,27 @@ class User extends Authenticatable
         return $this->roles()->where('id', 1)->exists();
     }
 
-    public function getIsLeacherAttribute()
+    public function getIsLecturerAttribute()
     {
         return $this->roles()->where('id', 3)->exists();
     }
 
     public function getIsStudentAttribute()
+    {
+        return $this->roles()->where('id', 4)->exists();
+    }
+
+    public function getIsAdmin()
+    {
+        return $this->roles()->where('id', 1)->exists();
+    }
+
+    public function getIsLecturer()
+    {
+        return $this->roles()->where('id', 3)->exists();
+    }
+
+    public function getIsStudent()
     {
         return $this->roles()->where('id', 4)->exists();
     }
