@@ -12,8 +12,17 @@ class CreateUsersTable extends Migration
             'users',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name');
+                $table->string('uname');
+                $table->string('fname');
+                $table->string('mname')->nullable();
+                $table->string('lname');
+                $table->integer('gender_id')->unsigned()->index();
+                $table->string('dob')->nullable();
+                $table->string('phone', 13)->nullable();
+                $table->integer('added_by_id')->nullable();
+                $table->integer('department_id')->nullable();
                 // $table->integer('class_id')->nullable();
+                $table->text('bio')->nullable();
                 $table->string('img_url', 256)->default('public/assets/img/users/user.png');
                 $table->string('email')->unique();
                 $table->datetime('email_verified_at')->nullable();

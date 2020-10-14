@@ -41,7 +41,7 @@
                         <small class="text-muted d-block pt-10">{{ trans('cruds.user.fields.id') }}</small>
                         <h5>{{ $user->id }}</h5>
                         <small class="text-muted d-block pt-10">{{ trans('cruds.user.fields.name') }}</small>
-                        <h5>{{ $user->name }}</h5>
+                        <h5>{{ $user->fname }}</h5>
                     </div>
                 </div>
             </div>
@@ -51,10 +51,10 @@
                         <li class="nav-item">
                             <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#lecturer_lessons" role="tab" aria-controls="pills-timeline" aria-selected="true">{{ trans('cruds.lesson.title') }}</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#last-month" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
-                        </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#lecturer_time_tables" role="tab" aria-controls="pills-profile" aria-selected="false">Time Table</a>
+                        </li>
+                        {{-- <li class="nav-item">
                             <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#previous-month" role="tab" aria-controls="pills-setting" aria-selected="false">Setting</a>
                         </li> --}}
                     </ul>
@@ -62,6 +62,13 @@
                         <div class="tab-pane fade active show" id="lecturer_lessons" role="tabpanel" aria-labelledby="pills-timeline-tab">
                             <div class="card-body">
                                 @includeIf('admin.users.relationships.lecturerLessons', ['lessons' => $user->lecturerLessons])
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="lecturer_time_tables" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="card-body">
+                                {{-- {{ route('admin.calendar.index') }}?class_id={{ $lectureClass->id }} --}}
+                                @includeIf('admin.users.relationships.lecturerTimeTables', ['lessons' => $user->lecturerLessons])
                             </div>
                         </div>
                     </div>

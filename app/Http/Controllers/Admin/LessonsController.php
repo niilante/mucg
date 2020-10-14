@@ -32,7 +32,7 @@ class LessonsController extends Controller
 
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
-        $data['lecturers'] = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.lessons.create', $data);
     }

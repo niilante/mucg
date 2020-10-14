@@ -69,9 +69,17 @@ class User extends Authenticatable
         return '';
     }
 
-
+    public function gender()
+    {
+        return $this->belongsTo("App\Gender", "gender_id");
+    }
 
     public function lecturerLessons()
+    {
+        return $this->hasMany(Lesson::class, 'lecturer_id', 'id');
+    }
+
+    public function lecturerTimeTables()
     {
         return $this->hasMany(Lesson::class, 'lecturer_id', 'id');
     }

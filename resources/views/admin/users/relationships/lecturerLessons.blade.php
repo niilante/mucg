@@ -57,7 +57,7 @@
                                 {{ $lesson->class->name ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->lecturer->name ?? '' }}
+                                {{ $lesson->lecturer->fname ?? '' }}
                             </td>
                             <td>
                                 {{ $lesson->weekname ?? '' }}
