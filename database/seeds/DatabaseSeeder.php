@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder
             [
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
+            GenderSeeder::class,
             PermissionRoleTableSeeder::class,
             LectureClassesTableSeeder::class,
             UsersTableSeeder::class,
