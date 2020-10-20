@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateLessonRequest;
 use App\Lesson;
 use App\LectureClass;
 use App\User;
+use App\Department;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,8 @@ class LessonsController extends Controller
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
         $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $data['departments'] = Department::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.lessons.create', $data);
     }

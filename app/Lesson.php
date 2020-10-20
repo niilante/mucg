@@ -26,6 +26,7 @@ class Lesson extends Model
         'class_id',
         'end_time',
         'lecturer_id',
+        'department_id',
         'start_time',
         'created_at',
         'updated_at',
@@ -41,6 +42,11 @@ class Lesson extends Model
         '6' => 'Saturday',
         '7' => 'Sunday',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, "department_id");
+    }
 
     public function getDifferenceAttribute()
     {
@@ -73,7 +79,7 @@ class Lesson extends Model
         )->format('H:i:s') : null;
     }
 
-    function class()
+    public function class()
     {
         return $this->belongsTo(LectureClass::class, 'class_id');
     }
