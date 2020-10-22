@@ -89,6 +89,8 @@ return [
             'description_helper'    => '',
             'department'           => 'Department',
             'department_helper'    => '',
+            'lectureHall'           => 'Lecture Hall',
+            'lectureHall_helper'    => '',
             'weekday'           => 'Weekday',
             'weekday_helper'    => '',
             'start_time'        => 'Start Time',
