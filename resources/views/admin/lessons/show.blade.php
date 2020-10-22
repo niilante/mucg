@@ -75,6 +75,14 @@
                                         </tr>
                                         <tr>
                                             <th>
+                                                {{ trans('cruds.lesson.fields.lectureHall') }}
+                                            </th>
+                                            <td>
+                                                {{ $lesson->lectureHall->name ?? '' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
                                                 {{ trans('cruds.lesson.fields.lecturer') }}
                                             </th>
                                             <td>

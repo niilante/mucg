@@ -57,11 +57,11 @@
                                         </td>
                                         @foreach($days as $value)
                                             @if (is_array($value))
-                                                <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-center" style="background-color:#f0f0f0">
-                                                    {{ $value['class_name'] }}<br>
-                                                    Course Code: {{ $value['title'] }}
-                                                    {{-- Lecture Hall: {{ $value['title'] }} --}}
-                                                    Lecturer: {{ $value['lecturer_name'] }}
+                                                <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-left" style="background-color:#f0f0f0">
+                                                    Class: {{ $value['class_name'] }}<br>
+                                                    Course Code: {{ $value['title'] }}<br>
+                                                    Lecturer: {{ $value['lecturer_name'] }}<br>
+                                                    Lecture Hall: {{ $value['lecture_hall_name'] }}
                                                 </td>
                                             @elseif ($value === 1)
                                                 <td></td>
