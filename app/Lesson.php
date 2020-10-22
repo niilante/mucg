@@ -23,6 +23,7 @@ class Lesson extends Model
         'description',
         'weekday',
         'weekname',
+        'lecture_hall_id',
         'class_id',
         'end_time',
         'lecturer_id',
@@ -82,6 +83,11 @@ class Lesson extends Model
     public function class()
     {
         return $this->belongsTo(LectureClass::class, 'class_id');
+    }
+
+    public function lectureHall()
+    {
+        return $this->belongsTo(LectureHall::class, 'lecture_hall_id');
     }
 
     public function lecturer()

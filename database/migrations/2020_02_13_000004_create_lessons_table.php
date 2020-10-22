@@ -12,13 +12,14 @@ class CreateLessonsTable extends Migration
             'lessons',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('weekday');
+                $table->integer('weekday')->nullable();
                 $table->string('title');
                 $table->text('description');
                 $table->integer('department_id')->unsigned()->index();
-                $table->string('weekname');
-                $table->time('start_time');
-                $table->time('end_time');
+                $table->integer('lecture_hall_id')->unsigned()->nullable();
+                $table->string('weekname')->nullable();
+                $table->time('start_time')->nullable();
+                $table->time('end_time')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             }

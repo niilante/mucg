@@ -8,6 +8,7 @@ use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use App\Lesson;
 use App\LectureClass;
+use App\LectureHall;
 use App\User;
 use App\Department;
 use Gate;
@@ -43,14 +44,27 @@ class LessonsController extends Controller
     public function store(StoreLessonRequest $request)
     {
         $data = $request->validated();
-        $weekday = $data["weekday"];
 
-        $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
-        $weekname = ($type_str[$weekday]."day");
+        $data = Self::processLessonDay($data);
 
-        $data["weekname"] = $weekname;
+        $data['class_size'] = LectureClass::where('id', $data['class_id'])->first()->capacity;
 
-        // return $data;
+        $data['lecture_hall_capacity'] = LectureHall::pluck('capacity')->toArray();
+
+        foreach ($data['lecture_hall_capacity'] as $key => $val) {
+            if ($val > $data['class_size']) {
+                $data['class_size'] = $val;
+            }
+        }
+        return $data['class_size'];
+
+        // $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
+
+        if ( $data['lecture_hall_capacity_first'] > $data['class_size'] ) {
+            return ;
+        }
+        return $data;
+
         Lesson::create($data);
 
         return redirect()->route('admin.lessons.index');
@@ -78,12 +92,8 @@ class LessonsController extends Controller
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
         $data = $request->validated();
-        $weekday = $data["weekday"];
 
-        $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
-        $weekname = ($type_str[$weekday]."day");
-
-        $data["weekname"] = $weekname;
+        $data = Self::processLessonDay($data);
 
         $data['lesson'] = $lesson->update($data);
 
@@ -118,5 +128,17 @@ class LessonsController extends Controller
         Lesson::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public static function processLessonDay(array $data)
+    {
+        $weekday = $data["weekday"];
+
+        $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
+        $weekname = ($type_str[$weekday]."day");
+
+        $data["weekname"] = $weekname;
+
+        return $data;
     }
 }
