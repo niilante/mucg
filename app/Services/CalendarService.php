@@ -10,13 +10,12 @@ class CalendarService
     {
         $calendarData = [];
         $timeRange = (new TimeService)->generateTimeRange(config('app.calendar.start_time'), config('app.calendar.end_time'));
-        $lessons   = Lesson::with('class', 'lecturer')
+        $lessons   = Lesson::with('class', 'lecturer', 'lectureHall')
             ->calendarByRoleOrClassId()
             ->get();
 
         foreach ($timeRange as $time) {
-
-            $timeText = ( date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
+            $timeText = (date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
             $calendarData[$timeText] = [];
 
             foreach ($weekDays as $index => $day) {
@@ -24,8 +23,9 @@ class CalendarService
 
                 if ($lesson) {
                     array_push($calendarData[$timeText], [
-                        'class_name'   => $lesson->class->name,
-                        'lecturer_name' => $lesson->lecturer->name,
+                        'class_name'   => $lesson->class->name ?? '',
+                        'lecturer_name' => $lesson->lecturer->fname ?? '',
+                        'lecture_hall_name' => $lesson->lectureHall->name ?? '',
                         'title'        => $lesson->title,
                         'rowspan'      => $lesson->difference/30 ?? ''
                     ]);
