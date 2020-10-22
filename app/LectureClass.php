@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\PluckableTrait;
 
 class LectureClass extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, PluckableTrait;
 
     public $table = 'lecture_classes';
 

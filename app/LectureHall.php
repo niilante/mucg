@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PluckableTrait;
 
 class LectureHall extends Model
 {
+    use PluckableTrait;
     protected $fillable = [
         'name',
         'description',
