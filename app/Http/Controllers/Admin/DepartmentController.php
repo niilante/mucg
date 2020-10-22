@@ -10,12 +10,11 @@ use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller
 {
-
     public function index()
     {
         abort_if(Gate::denies('department_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['departments'] = Department::orderBy('updated_at','DESC')->get();
+        $data['departments'] = Department::orderBy('updated_at', 'DESC')->get();
 
         return view('admin.departments.index', $data);
     }

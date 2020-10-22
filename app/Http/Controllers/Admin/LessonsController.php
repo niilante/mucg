@@ -45,25 +45,32 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
 
-        $data = Self::processLessonDay($data);
+        $data = self::processLessonDay($data);
+
+        // Start of Logic For Lecture Hall Sorting Before Saving
 
         $data['class_size'] = LectureClass::where('id', $data['class_id'])->first()->capacity;
 
-        $data['lecture_hall_capacity'] = LectureHall::pluck('capacity')->toArray();
+        $data['lecture_hall_capacity'] = LectureHall::orderBy('capacity', 'DESC')
+                                                            ->pluck('capacity')->toArray();
 
         foreach ($data['lecture_hall_capacity'] as $key => $val) {
             if ($val > $data['class_size']) {
                 $data['class_size'] = $val;
             }
         }
-        return $data['class_size'];
+        
+        $data['class_size'];
 
-        // $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
+        $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
 
-        if ( $data['lecture_hall_capacity_first'] > $data['class_size'] ) {
-            return ;
+        if ($data['lecture_hall_capacity_first'] >= $data['class_size']) {
+            $data['lecture_hall_capacity_first'];
         }
-        return $data;
+        
+        $data['lecture_hall_id'] = LectureHall::getIdByCustomField('capacity', $data["lecture_hall_capacity_first"]);
+        
+        // End of Logic For Lecture Hall Sorting Before Saving
 
         Lesson::create($data);
 
@@ -104,14 +111,16 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $lesson->load('lecturer', 'class');
+        $lesson->load('lecturer', 'class', 'lectureHall');
         $lesson_lecturer = $lesson->load('lecturer');
         $lesson_class = $lesson->load('class');
         $lecturer = $lesson_lecturer->lecturer;
         $data['lecturer_cd'] = User::findOrFail($lesson_lecturer->lecturer->id);
         // return $data['lecturer'] = User::where('lecturer_id', $lesson_lecturer->id)->get();
 
-        return view('admin.lessons.show', $data, compact('lesson'));
+        $data['lesson'] = $lesson;
+        // return $data;
+        return view('admin.lessons.show', $data);
     }
 
     public function destroy(Lesson $lesson)

@@ -13,6 +13,8 @@ class CalendarController extends Controller
         $data['weekDays']     = Lesson::WEEK_DAYS;
         $data['calendarData'] = $calendarService->generateCalendarData($data['weekDays']);
 
+        // return Lesson::all();
+        // return $data;
         return view('admin.calendar', $data);
     }
 }
