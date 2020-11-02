@@ -18,7 +18,7 @@
                     <div class="col-lg-4">
                         <nav class="breadcrumb-container" aria-label="breadcrumb">
                             <div>
-                                <a href="{{route('admin.lecture-classes.create')}}" class="btn btn-outline-info">
+                                <a href="{{route('admin.lecture-halls.create')}}" class="btn btn-outline-info">
                                     <i class="ik ik-plus-square"></i>
                                     {{ trans('global.add') }} {{ trans('cruds.lectureHall.title_singular') }}
                                 </a>

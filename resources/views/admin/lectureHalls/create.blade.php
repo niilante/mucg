@@ -1,25 +1,65 @@
 @extends('layouts.admin')
+@section('title', __('Add Lecture Hall'))
 @section('content')
 
 <div class="main-content">
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                {{ trans('global.create') }} {{ trans('cruds.lectureClass.title_singular') }}
+                {{ trans('global.create') }} {{ trans('cruds.lectureHall.title_singular') }}
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("admin.lecture-classes.store") }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route("admin.lecture-halls.store") }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label class="required" for="name">{{ trans('cruds.lectureClass.fields.name') }}</label>
-                        <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
-                        @if($errors->has('name'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('name') }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="name">{{ trans('cruds.lectureHall.fields.name') }}</label>
+                                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name') }}" required>
+                                @if($errors->has('name'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('name') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lectureHall.fields.name_helper') }}</span>
                             </div>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.lectureClass.fields.name_helper') }}</span>
+                            <div class="form-group">
+                                <label class="required" for="description">{{ trans('cruds.lectureHall.fields.description') }}</label>
+                                <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5" type="text" name="description" id="description" value="{{ old('description') }}" required></textarea>
+                                {{-- <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description') }}" required> --}}
+                                @if($errors->has('description'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('description') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lectureHall.fields.description_helper') }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="code">{{ trans('cruds.lectureHall.fields.code') }}</label>
+                                <input class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" type="text" name="code" id="code" value="{{ old('code') }}" required>
+                                @if($errors->has('code'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('code') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lectureHall.fields.code_helper') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="required" for="capacity">{{ trans('cruds.lectureHall.fields.capacity') }}</label>
+                                <input class="form-control {{ $errors->has('capacity') ? 'is-invalid' : '' }}" type="text" name="capacity" id="capacity" value="{{ old('capacity') }}" required>
+                                @if($errors->has('capacity'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('capacity') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lectureHall.fields.capacity_helper') }}</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" type="submit">
