@@ -243,6 +243,10 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '56',
                 'title' => 'position_access',
             ],
+            [
+                'id'    => '19',
+                'title' => 'lesson_schedule',
+            ],
         ];
 
         Permission::insert($permissions);

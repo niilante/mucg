@@ -13,9 +13,9 @@ class CreateLessonsTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('weekday')->nullable();
-                $table->string('title');
-                $table->text('description');
-                $table->integer('department_id')->unsigned()->index();
+                $table->string('title')->nullable();
+                $table->text('description')->nullable();
+                $table->integer('department_id')->unsigned()->nullable();
                 $table->integer('lecture_hall_id')->unsigned()->nullable();
                 $table->string('weekname')->nullable();
                 $table->time('start_time')->nullable();

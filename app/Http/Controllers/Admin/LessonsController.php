@@ -100,7 +100,7 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
 
-        $data = Self::processLessonDay($data);
+        $data = self::processLessonDay($data);
 
         $data['lesson'] = $lesson->update($data);
 
