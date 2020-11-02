@@ -1,110 +1,55 @@
 @extends('layouts.admin_app')
-@section('title', __('Add Lesson'))
+@section('title', __('Add Department'))
 @section('content')
 
 <div class="main-content">
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                {{ trans('global.create') }} {{ trans('cruds.lesson.title_singular') }}
+                {{ trans('global.create') }} {{ trans('cruds.department.title_singular') }}
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("admin.lessons.store") }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route("admin.departments.store") }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="required" for="title">{{ trans('cruds.lesson.fields.title') }}</label>
-                                <input class="form-control lesson-timepicker {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title') }}" required>
-                                @if($errors->has('title'))
+                                <label class="required" for="name">{{ trans('cruds.department.fields.name') }}</label>
+                                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name') }}" required>
+                                @if($errors->has('name'))
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('title') }}
+                                        {{ $errors->first('name') }}
                                     </div>
                                 @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.title_helper') }}</span>
+                                <span class="help-block">{{ trans('cruds.department.fields.name_helper') }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="required" for="description">{{ trans('cruds.lesson.fields.description') }}</label>
-                                <textarea class="form-control lesson-timepicker {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5" type="text" name="description" id="description" value="{{ old('description') }}" required></textarea>
-                                {{-- <input class="form-control lesson-timepicker {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description') }}" required> --}}
+                                <label class="required" for="description">{{ trans('cruds.department.fields.description') }}</label>
+                                <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5" type="text" name="description" id="description" value="{{ old('description') }}" required></textarea>
+                                {{-- <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description') }}" required> --}}
                                 @if($errors->has('description'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('description') }}
                                     </div>
                                 @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.description_helper') }}</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required" for="class_id">{{ trans('cruds.lesson.fields.class') }}</label>
-                                <select class="form-control select2 {{ $errors->has('class') ? 'is-invalid' : '' }}" name="class_id" id="class_id" required>
-                                    @foreach($classes as $id => $class)
-                                        <option value="{{ $id }}" {{ old('class_id') == $id ? 'selected' : '' }}>{{ $class }}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('class'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('class') }}
-                                    </div>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.class_helper') }}</span>
+                                <span class="help-block">{{ trans('cruds.department.fields.description_helper') }}</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="required" for="lecturer_id">{{ trans('cruds.lesson.fields.lecturer') }}</label>
-                                <select class="form-control select2 {{ $errors->has('lecturer') ? 'is-invalid' : '' }}" name="lecturer_id" id="lecturer_id" required>
-                                    @foreach($lecturers as $id => $lecturer)
-                                        <option value="{{ $id }}" {{ old('lecturer_id') == $id ? 'selected' : '' }}>{{ $lecturer }}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('lecturer'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('lecturer') }}
-                                    </div>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.lecturer_helper') }}</span>
-                            </div>
-
                             {{-- @foreach( $errors->all() as $error)
                                 <li>{{$error}}</li>
                             @endforeach --}}
-
                             <div class="form-group">
-                                <label class="required" for="weekday">{{ trans('cruds.lesson.fields.weekday') }}</label>
-                                <select class="form-control select2 {{ $errors->has('weekday') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
-                                    @foreach($weekDays as $index => $day)
-                                        <option value="{{ $index }}" {{ old('weekday') == $day ? 'selected' : '' }}>{{ $day }}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('weekday'))
+                                <label class="required" for="code">{{ trans('cruds.department.fields.code') }}</label>
+                                <input class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" type="text" name="code" id="code" value="{{ old('code') }}" required>
+                                @if($errors->has('code'))
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('weekday') }}
+                                        {{ $errors->first('code') }}
                                     </div>
                                 @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.weekday_helper') }}</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="required" for="start_time">{{ trans('cruds.lesson.fields.start_time') }}</label>
-                                <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="time" name="start_time" id="start_time" value="{{ old('start_time') }}" required>
-                                @if($errors->has('start_time'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('start_time') }}
-                                    </div>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.start_time_helper') }}</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required" for="end_time">{{ trans('cruds.lesson.fields.end_time') }}</label>
-                                <input class="form-control lesson-timepicker {{ $errors->has('end_time') ? 'is-invalid' : '' }}" type="time" name="end_time" id="end_time" value="{{ old('end_time') }}" required>
-                                @if($errors->has('end_time'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('end_time') }}
-                                    </div>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.end_time_helper') }}</span>
+                                <span class="help-block">{{ trans('cruds.department.fields.code_helper') }}</span>
                             </div>
                         </div>
                     </div>
