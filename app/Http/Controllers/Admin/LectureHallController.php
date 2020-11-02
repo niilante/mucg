@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\LectureHall;
 use Illuminate\Http\Request;
+use App\Http\Requests\MassDestroyLectureHallRequest;
+use App\Http\Requests\StoreLectureHallRequest;
+use App\Http\Requests\UpdateLectureHallRequest;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
@@ -31,26 +34,20 @@ class LectureHallController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(Gate::denies('lecture_hall_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('admin.lectureHalls.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreLectureHallRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        LectureHall::create($data);
+
+        return redirect()->route('admin.lecture-halls.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\LectureHall  $lectureHall
-     * @return \Illuminate\Http\Response
-     */
     public function show(LectureHall $lectureHall)
     {
         $lectureHall;
@@ -61,12 +58,6 @@ class LectureHallController extends Controller
         return view('admin.lectureHalls.show', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\LectureHall  $lectureHall
-     * @return \Illuminate\Http\Response
-     */
     public function edit(LectureHall $lectureHall)
     {
         $data['lectureHall'] = $lectureHall;
@@ -74,26 +65,27 @@ class LectureHallController extends Controller
         return view('admin.lectureHalls.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LectureHall  $lectureHall
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LectureHall $lectureHall)
+   
+    public function update(UpdateLectureHallRequest $request, LectureHall $lectureHall)
+    {
+        $data = $request->validated();
+
+        $data['lectureHall'] = $lectureHall->update($data);
+
+        // return view('admin.lectureHalls.index', $data);
+
+        return redirect()->route('admin.lecture-halls.index');
+    }
+
+    public function destroy(LectureHall $lectureHall)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\LectureHall  $lectureHall
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LectureHall $lectureHall)
+    public function massDestroy(MassDestroyLectureHallRequest $request)
     {
-        //
+        LectureHall::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
