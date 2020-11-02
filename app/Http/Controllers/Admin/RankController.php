@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Rank;
 use Illuminate\Http\Request;
+use App\Http\Requests\MassDestroyRankRequest;
+use App\Http\Requests\StoreRankRequest;
+use App\Http\Requests\UpdateRankRequest;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
@@ -19,7 +22,7 @@ class RankController extends Controller
     {
         abort_if(Gate::denies('rank_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['ranks'] = Rank::orderBy('updated_at','DESC')->get();
+        $data['ranks'] = Rank::orderBy('updated_at', 'DESC')->get();
 
         return view('admin.ranks.index', $data);
     }
@@ -31,7 +34,11 @@ class RankController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(Gate::denies('rank_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // $data[''] = Rank::orderBy('updated_at', 'DESC')->get();
+
+        return view('admin.ranks.create');
     }
 
     /**
@@ -40,9 +47,13 @@ class RankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRankRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Rank::create($data);
+
+        return redirect()->route('admin.ranks.index');
     }
 
     /**
@@ -80,9 +91,13 @@ class RankController extends Controller
      * @param  \App\Rank  $rank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rank $rank)
+    public function update(UpdateRankRequest $request, Rank $rank)
     {
-        //
+        $data = $request->validated();
+
+        $data['rank'] = $rank->update($data);
+
+        return redirect()->route('admin.ranks.index');
     }
 
     /**
@@ -94,5 +109,12 @@ class RankController extends Controller
     public function destroy(Rank $rank)
     {
         //
+    }
+
+    public function massDestroy(MassDestroyRankRequest $request)
+    {
+        Rank::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
