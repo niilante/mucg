@@ -1,8 +1,8 @@
 <?php
 
 Route::get('/', function () {
-        return redirect(route('login'));
-    })->name('admin');
+    return redirect(route('login'));
+}) ->name('admin');
 
 Route::get(
     '/home',
