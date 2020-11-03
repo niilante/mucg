@@ -88,7 +88,7 @@
                         <i class="ik ik-calendar"></i>
                         Time table
                     </a>
-                    <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.lessons.index_scheduler") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
                         <i class="ik ik-refresh-cw"></i>
                         Scheduler
                     </a>

@@ -12,6 +12,9 @@
                 {{ trans('cruds.lesson.fields.class') }}
             </th>
             <th>
+                {{ trans('cruds.lesson.fields.lectureHall') }}
+            </th>
+            <th>
                 {{ trans('cruds.lesson.fields.lecturer') }}
             </th>
             <th>
@@ -41,6 +44,9 @@
                     {{ $lesson->class->name ?? '' }}
                 </td>
                 <td>
+                    {{ $lesson->lectureHall->name ?? '' }}
+                </td>
+                <td>
                     {{ $lesson->lecturer->fname ?? '' }}
                 </td>
                 <td>
@@ -61,16 +67,16 @@
                 <td>
 
                     <div class="table-actions text-center">
-                        @can('lesson_show')
-                            <a href="{{ route('admin.lessons.show', $lesson->id) }}" data-toggle="tooltip" title="Show">
-                                <i class="ik ik-eye f-16 mr-15 text-blue"></i>
+                        @can('lesson_schedule')
+                            <a href="{{ route('admin.lessons.post_lesson_scheduler', $lesson) }}" data-toggle="tooltip" title="Schedule">
+                                <i class="ik ik-refresh-cw f-16 mr-15 text-blue"></i>
                             </a>
                         @endcan
-                        @can('lesson_edit')
+                        {{-- @can('lesson_edit')
                             <a href="{{ route('admin.lessons.edit', $lesson->id) }}" data-toggle="tooltip" title="Edit">
                                 <i class="ik ik-edit-2 f-16 mr-15 text-green"></i>
                             </a>
-                        @endcan
+                        @endcan --}}
                         {{-- @can('lesson_delete')
                             <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                 <input type="hidden" name="_method" value="DELETE">

@@ -9,7 +9,7 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("admin.lessons.update", [$lesson->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route("admin.lessons.update", [$lesson]) }}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="row">
@@ -39,6 +39,21 @@
                                 <select class="form-control select2 {{ $errors->has('class') ? 'is-invalid' : '' }}" name="class_id" id="class_id" required>
                                     @foreach($classes as $id => $class)
                                         <option value="{{ $id }}" {{ ($lesson->class ? $lesson->class->id : old('class_id')) == $id ? 'selected' : '' }}>{{ $class }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('class'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('class') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lesson.fields.class_helper') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="required" for="lecture_hall_id">{{ trans('cruds.lesson.fields.lectureHall') }}</label>
+                                <select class="form-control select2 {{ $errors->has('lectureHall') ? 'is-invalid' : '' }}" name="lecture_hall_id" id="lecture_hall_id" required>
+                                    @foreach($lectureHalls as $id => $lectureHall)
+                                        <option value="{{ $id }}" {{ ($lesson->lectureHall ? $lesson->lectureHall->id : old('lectureHall_id')) == $id ? 'selected' : '' }}>{{ $lectureHall }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('class'))
@@ -84,7 +99,7 @@
 
                             <div class="form-group">
                                 <label class="required" for="start_time">{{ trans('cruds.lesson.fields.start_time') }}</label>
-                                <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="text" name="start_time" id="start_time" value="{{ old('start_time', $lesson->start_time) }}" required>
+                                <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="time" name="start_time" id="start_time" value="{{ old('start_time', $lesson->start_time) }}" required>
                                 @if($errors->has('start_time'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('start_time') }}
@@ -94,7 +109,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="required" for="end_time">{{ trans('cruds.lesson.fields.end_time') }}</label>
-                                <input class="form-control lesson-timepicker {{ $errors->has('end_time') ? 'is-invalid' : '' }}" type="text" name="end_time" id="end_time" value="{{ old('end_time', $lesson->end_time) }}" required>
+                                <input class="form-control lesson-timepicker {{ $errors->has('end_time') ? 'is-invalid' : '' }}" type="time" name="end_time" id="end_time" value="{{ old('end_time', $lesson->end_time) }}" required>
                                 @if($errors->has('end_time'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('end_time') }}

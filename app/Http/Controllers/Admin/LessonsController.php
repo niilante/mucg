@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyLessonRequest;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
+use App\Http\Requests\PostLessonSchedulerRequest;
 use App\Lesson;
 use App\LectureClass;
 use App\LectureHall;
@@ -32,7 +33,7 @@ class LessonsController extends Controller
 
         $data['classes'] = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $data['weekDays'] = Lesson::WEEK_DAYS;
+        // $data['weekDays'] = Lesson::WEEK_DAYS;
 
         $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -45,30 +46,30 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
 
-        $data = self::processLessonDay($data);
+        // $data = self::processLessonDay($data);
 
         // Start of Logic For Lecture Hall Sorting Before Saving
 
-        $data['class_size'] = LectureClass::where('id', $data['class_id'])->first()->capacity;
+        // $data['class_size'] = LectureClass::where('id', $data['class_id'])->first()->capacity;
 
-        $data['lecture_hall_capacity'] = LectureHall::orderBy('capacity', 'DESC')
-                                                            ->pluck('capacity')->toArray();
+        // $data['lecture_hall_capacity'] = LectureHall::orderBy('capacity', 'DESC')
+        //                                                     ->pluck('capacity')->toArray();
 
-        foreach ($data['lecture_hall_capacity'] as $key => $val) {
-            if ($val > $data['class_size']) {
-                $data['class_size'] = $val;
-            }
-        }
+        // foreach ($data['lecture_hall_capacity'] as $key => $val) {
+        //     if ($val > $data['class_size']) {
+        //         $data['class_size'] = $val;
+        //     }
+        // }
         
-        $data['class_size'];
+        // $data['class_size'];
 
-        $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
+        // $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
 
-        if ($data['lecture_hall_capacity_first'] >= $data['class_size']) {
-            $data['lecture_hall_capacity_first'];
-        }
+        // if ($data['lecture_hall_capacity_first'] >= $data['class_size']) {
+        //     $data['lecture_hall_capacity_first'];
+        // }
         
-        $data['lecture_hall_id'] = LectureHall::getIdByCustomField('capacity', $data["lecture_hall_capacity_first"]);
+        // $data['lecture_hall_id'] = LectureHall::getIdByCustomField('capacity', $data["lecture_hall_capacity_first"]);
         
         // End of Logic For Lecture Hall Sorting Before Saving
 
@@ -79,6 +80,7 @@ class LessonsController extends Controller
 
     public function edit(Lesson $lesson)
     {
+        // return 'ddfdf';
         abort_if(Gate::denies('lesson_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $data['lesson'] = $lesson;
@@ -86,6 +88,8 @@ class LessonsController extends Controller
         $data['weekday'] = $data["lesson"]->weekname;
 
         $data['classes'] = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $data['lectureHalls'] = LectureHall::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $data['weekDays'] = Lesson::WEEK_DAYS;
 
@@ -98,9 +102,10 @@ class LessonsController extends Controller
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        $data = $request->validated();
+        // return 'dcdcdc';
+        return $data = $request->validated();
 
-        $data = Self::processLessonDay($data);
+        $data = self::processLessonDay($data);
 
         $data['lesson'] = $lesson->update($data);
 
@@ -121,6 +126,28 @@ class LessonsController extends Controller
         $data['lesson'] = $lesson;
         // return $data;
         return view('admin.lessons.show', $data);
+    }
+
+    public function indexScheduler()
+    {
+        abort_if(Gate::denies('lesson_schedule_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $data['lessons'] = Lesson::where('lecture_hall_id', '=', null)
+                                    ->where('weekname', '=', null)
+                                    ->where('start_time', '=', null)
+                                    ->where('end_time', '=', null)
+                                    ->get();
+
+        return view('admin.lessons.index_scheduler', $data);
+    }
+
+    public function postLessonScheduler(Request $request, Lesson $lesson)
+    {
+        $data = $request->validated();
+
+        $data['lesson'] = $lesson->update($data);
+
+        return redirect()->route('admin.lessons.index_scheduler');
     }
 
     public function destroy(Lesson $lesson)
