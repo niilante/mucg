@@ -31,6 +31,12 @@ class UpdateLessonRequest extends FormRequest
             'class_id'   => [
                 'required',
                 'integer'],
+            'department_id'   => [
+                'required',
+                'integer'],
+            'lecture_hall_id'   => [
+                'required',
+                'integer'],
             'lecturer_id' => [
                 'required',
                 'integer'],
@@ -41,7 +47,7 @@ class UpdateLessonRequest extends FormRequest
                 'max:7'],
             'start_time' => [
                 'required',
-                new LessonTimeAvailabilityRule($this->route('lesson')->id),
+                new LessonTimeAvailabilityRule(),
                 'date_format:' . config('panel.lesson_time_format')],
             'end_time'   => [
                 'required',
