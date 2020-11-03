@@ -43,6 +43,10 @@ Route::group(
         Route::delete('lessons/destroy', 'LessonsController@massDestroy')
                 ->name('lessons.massDestroy');
         Route::resource('lessons', 'LessonsController');
+        Route::get('schedule/lessons', 'LessonsController@indexScheduler')
+                ->name('lessons.index_scheduler');
+        Route::post('schedule/lessons/{lesson}', 'LessonsController@postLessonScheduler')
+                ->name('lessons.post_lesson_scheduler');
 
         // Departments
         Route::delete('departments/destroy', 'DepartmentController@massDestroy')
