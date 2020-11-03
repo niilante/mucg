@@ -244,8 +244,12 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'position_access',
             ],
             [
-                'id'    => '19',
+                'id'    => '57',
                 'title' => 'lesson_schedule',
+            ],
+            [
+                'id'    => '58',
+                'title' => 'lesson_schedule_access',
             ],
         ];
 
