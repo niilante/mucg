@@ -47,10 +47,16 @@
                     {{ $lesson->weekname ?? '' }}
                 </td>
                 <td>
-                    {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
+                    @if($lesson->start_time == null)    
+                    @else
+                        {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
+                    @endif
                 </td>
                 <td>
-                    {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
+                    @if($lesson->end_time == null)    
+                    @else
+                        {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
+                    @endif
                 </td>
                 <td>
 

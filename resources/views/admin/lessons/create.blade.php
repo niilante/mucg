@@ -86,7 +86,7 @@
                                 <li>{{$error}}</li>
                             @endforeach --}}
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="required" for="weekday">{{ trans('cruds.lesson.fields.weekday') }}</label>
                                 <select class="form-control select2 {{ $errors->has('weekday') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
                                     @foreach($weekDays as $index => $day)
@@ -120,7 +120,7 @@
                                     </div>
                                 @endif
                                 <span class="help-block">{{ trans('cruds.lesson.fields.end_time_helper') }}</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="form-group">

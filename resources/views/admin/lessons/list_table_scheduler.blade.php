@@ -12,6 +12,9 @@
                 {{ trans('cruds.lesson.fields.class') }}
             </th>
             <th>
+                {{ trans('cruds.lesson.fields.lectureHall') }}
+            </th>
+            <th>
                 {{ trans('cruds.lesson.fields.lecturer') }}
             </th>
             <th>
@@ -41,23 +44,32 @@
                     {{ $lesson->class->name ?? '' }}
                 </td>
                 <td>
+                    {{ $lesson->lectureHall->name ?? '' }}
+                </td>
+                <td>
                     {{ $lesson->lecturer->fname ?? '' }}
                 </td>
                 <td>
                     {{ $lesson->weekname ?? '' }}
                 </td>
                 <td>
-                    {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
+                    @if($lesson->start_time == null)    
+                    @else
+                        {{ date('h:i A', strtotime($lesson->start_time)) ?? '' }}
+                    @endif
                 </td>
                 <td>
-                    {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
+                    @if($lesson->end_time == null)    
+                    @else
+                        {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
+                    @endif
                 </td>
                 <td>
 
                     <div class="table-actions text-center">
                         @can('lesson_schedule')
-                            <a href="{{ route('admin.lessons.show', $lesson->id) }}" data-toggle="tooltip" title="Show">
-                                <i class="ik ik-eye f-16 mr-15 text-blue"></i>
+                            <a href="{{ route('admin.lessons.post_lesson_scheduler', $lesson) }}" data-toggle="tooltip" title="Schedule">
+                                <i class="ik ik-refresh-cw f-16 mr-15 text-blue"></i>
                             </a>
                         @endcan
                         {{-- @can('lesson_edit')

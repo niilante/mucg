@@ -9,7 +9,7 @@
                     <div class="page-header-title">
                         <i class="ik ik-layers bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ trans('cruds.lesson.title_singular') }} {{ trans('global.list') }}</h5>
+                            <h5>{{ trans('cruds.lesson.title_singular') }} {{ trans('global.list') }} To Be Scheduled</h5>
                             <span>Registered Lessons To Be Scheduled with last updated on top</span>
                         </div>
                     </div>
