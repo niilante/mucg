@@ -22,6 +22,8 @@ class Lesson extends Model
         'title',
         'description',
         'weekday',
+        'code',
+        'duration',
         'weekname',
         'lecture_hall_id',
         'class_id',
@@ -42,6 +44,12 @@ class Lesson extends Model
         '5' => 'Friday',
         '6' => 'Saturday',
         '7' => 'Sunday',
+    ];
+
+    const LESSON_SESSIONS = [
+        '1' => 'Morning',
+        '2' => 'Evening',
+        '3' => 'Weekend',
     ];
 
     public function department()
@@ -80,7 +88,7 @@ class Lesson extends Model
         )->format('H:i:s') : null;
     }
 
-    public function class()
+    public function classMembers()
     {
         return $this->belongsTo(LectureClass::class, 'class_id');
     }

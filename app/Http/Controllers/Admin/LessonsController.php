@@ -13,6 +13,7 @@ use App\LectureHall;
 use App\User;
 use App\Department;
 use Gate;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,32 +47,7 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
 
-        // $data = self::processLessonDay($data);
-
-        // Start of Logic For Lecture Hall Sorting Before Saving
-
-        // $data['class_size'] = LectureClass::where('id', $data['class_id'])->first()->capacity;
-
-        // $data['lecture_hall_capacity'] = LectureHall::orderBy('capacity', 'DESC')
-        //                                                     ->pluck('capacity')->toArray();
-
-        // foreach ($data['lecture_hall_capacity'] as $key => $val) {
-        //     if ($val > $data['class_size']) {
-        //         $data['class_size'] = $val;
-        //     }
-        // }
-        
-        // $data['class_size'];
-
-        // $data['lecture_hall_capacity_first'] = $data['lecture_hall_capacity'][0];
-
-        // if ($data['lecture_hall_capacity_first'] >= $data['class_size']) {
-        //     $data['lecture_hall_capacity_first'];
-        // }
-        
-        // $data['lecture_hall_id'] = LectureHall::getIdByCustomField('capacity', $data["lecture_hall_capacity_first"]);
-        
-        // End of Logic For Lecture Hall Sorting Before Saving
+        $data['code'] = strtolower(Str::slug($data['title'], '-'));
 
         Lesson::create($data);
 
@@ -80,7 +56,6 @@ class LessonsController extends Controller
 
     public function edit(Lesson $lesson)
     {
-        // return 'ddfdf';
         abort_if(Gate::denies('lesson_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $data['lesson'] = $lesson;
@@ -95,15 +70,14 @@ class LessonsController extends Controller
 
         $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $data['lesson']->load('class', 'lecturer');
+        $data['lesson']->load('classMembers', 'lecturer');
 
         return view('admin.lessons.edit', $data);
     }
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        // return 'dcdcdc';
-        return $data = $request->validated();
+        $data = $request->validated();
 
         $data = self::processLessonDay($data);
 
@@ -118,7 +92,7 @@ class LessonsController extends Controller
 
         $lesson->load('lecturer', 'class', 'lectureHall');
         $lesson_lecturer = $lesson->load('lecturer');
-        $lesson_class = $lesson->load('class');
+        $lesson_class = $lesson->load('classMembers');
         $lecturer = $lesson_lecturer->lecturer;
         $data['lecturer_cd'] = User::findOrFail($lesson_lecturer->lecturer->id);
         // return $data['lecturer'] = User::where('lecturer_id', $lesson_lecturer->id)->get();
@@ -143,6 +117,7 @@ class LessonsController extends Controller
 
     public function postLessonScheduler(Request $request, Lesson $lesson)
     {
+        return $lesson;
         $data = $request->validated();
 
         $data['lesson'] = $lesson->update($data);
