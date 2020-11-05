@@ -71,13 +71,17 @@
                                 <i class="ik ik-edit-2 f-16 mr-15 text-green"></i>
                             </a>
                         @endcan
-                        {{-- @can('lesson_delete')
-                            <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                            </form>
-                        @endcan --}}
+
+                        @if($lesson->start_time == null && $lesson->end_time == null && $lesson->start_time == null)
+                            
+                        @else
+                            @can('lesson_schedule')
+                                <a href="#lesson-{{ $lesson->code ?? '' }}" data-toggle="modal" data-toggle="tooltip" title="Schedule">
+                                    <i class="ik ik-refresh-cw f-16 mr-15 text-blue"></i>
+                                </a>
+                            @endcan
+                        @endif
+
                     </div>
                 </td>
 
@@ -86,3 +90,22 @@
     </tbody>
 </table>
 
+@foreach($lessons as $key => $lesson)
+    <div class="modal fade" id="lesson-{{ $lesson->code ?? '' }}" tabindex="-1" role="dialog" aria-labelledby="lesson-{{ $lesson->code ?? '' }}Label" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lesson-{{ $lesson->code ?? '' }}Label">Lesson Scheduler</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to schedule lesson <b>{{ $lesson->title ?? '' }}</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Yes, Schedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
