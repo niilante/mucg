@@ -38,7 +38,7 @@
                     {{ $lesson->title ?? '' }}
                 </td>
                 <td>
-                    {{ $lesson->class->name ?? '' }}
+                    {{ $lesson->classMembers->name ?? '' }}
                 </td>
                 <td>
                     {{ $lesson->lecturer->fname ?? '' }}

@@ -31,6 +31,9 @@ class StoreLessonRequest extends FormRequest
             'class_id'   => [
                 'required',
                 'integer'],
+            'duration'   => [
+                'required',
+                'integer'],
             'department_id'   => [
                 'required',
                 'integer'],

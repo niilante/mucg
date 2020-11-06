@@ -8,10 +8,12 @@ use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use App\Http\Requests\PostLessonSchedulerRequest;
 use App\Lesson;
+use App\LessonSchedule;
 use App\LectureClass;
 use App\LectureHall;
 use App\User;
 use App\Department;
+use App\WeekDay;
 use Gate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -49,6 +51,7 @@ class LessonsController extends Controller
 
         $data['code'] = strtolower(Str::slug($data['title'], '-'));
 
+        // return $data;
         Lesson::create($data);
 
         return redirect()->route('admin.lessons.index');
@@ -60,13 +63,14 @@ class LessonsController extends Controller
 
         $data['lesson'] = $lesson;
 
-        $data['weekday'] = $data["lesson"]->weekname;
+        // $data['weekday'] = $data["lesson"]->weekDay->name;
 
         $data['classes'] = LectureClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $data['lectureHalls'] = LectureHall::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $data['weekDays'] = Lesson::WEEK_DAYS;
+        $data['weekDays'] = WeekDay::all()
+                            ->pluck('name', 'id');
 
         $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -79,7 +83,7 @@ class LessonsController extends Controller
     {
         $data = $request->validated();
 
-        $data = self::processLessonDay($data);
+        // $data = self::processLessonDay($data);
 
         $data['lesson'] = $lesson->update($data);
 
@@ -90,15 +94,13 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $lesson->load('lecturer', 'class', 'lectureHall');
+        $lesson->load('lecturer', 'classMembers', 'lectureHall');
         $lesson_lecturer = $lesson->load('lecturer');
         $lesson_class = $lesson->load('classMembers');
         $lecturer = $lesson_lecturer->lecturer;
         $data['lecturer_cd'] = User::findOrFail($lesson_lecturer->lecturer->id);
-        // return $data['lecturer'] = User::where('lecturer_id', $lesson_lecturer->id)->get();
-
         $data['lesson'] = $lesson;
-        // return $data;
+        
         return view('admin.lessons.show', $data);
     }
 
@@ -107,7 +109,8 @@ class LessonsController extends Controller
         abort_if(Gate::denies('lesson_schedule_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $data['lessons'] = Lesson::where('lecture_hall_id', '=', null)
-                                    ->where('weekname', '=', null)
+                                    ->where('weekday_id', '=', null)
+                                    ->where('session_week_day_id', '=', null)
                                     ->where('start_time', '=', null)
                                     ->where('end_time', '=', null)
                                     ->get();
@@ -115,11 +118,9 @@ class LessonsController extends Controller
         return view('admin.lessons.index_scheduler', $data);
     }
 
-    public function postLessonScheduler(Request $request, Lesson $lesson)
+    public function postLessonScheduler(Lesson $lesson, Request $request)
     {
-        return $lesson;
-        $data = $request->validated();
-
+        $data[] = '';
         $data['lesson'] = $lesson->update($data);
 
         return redirect()->route('admin.lessons.index_scheduler');
@@ -141,15 +142,15 @@ class LessonsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public static function processLessonDay(array $data)
-    {
-        $weekday = $data["weekday"];
+    // public static function processLessonDay(array $data)
+    // {
+    //     $weekday = $data["weekday"];
 
-        $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
-        $weekname = ($type_str[$weekday]."day");
+    //     $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
+    //     $weekname = ($type_str[$weekday]."day");
 
-        $data["weekname"] = $weekname;
+    //     $data["weekname"] = $weekname;
 
-        return $data;
-    }
+    //     return $data;
+    // }
 }

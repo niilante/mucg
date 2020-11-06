@@ -82,22 +82,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="required" for="weekday">{{ trans('cruds.lesson.fields.weekday') }}</label>
-                                <?php $selected_weekday = old("weekday")? old("weekday"): $weekday;?>
-                                <select class="form-control select2 {{ $errors->has('weekday') ? 'is-invalid' : '' }}" name="weekday" id="weekday" required>
-                                    @foreach($weekDays as $index => $day)
-                                        <option value="{{ $index }}" {{ $selected_weekday == $day ? 'selected' : '' }}>{{ $day }}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('weekday'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('weekday') }}
-                                    </div>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.weekday_helper') }}</span>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="required" for="start_time">{{ trans('cruds.lesson.fields.start_time') }}</label>
                                 <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="time" name="start_time" id="start_time" value="{{ old('start_time', $lesson->start_time) }}" required>
                                 @if($errors->has('start_time'))

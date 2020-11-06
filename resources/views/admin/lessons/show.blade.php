@@ -94,7 +94,15 @@
                                                 {{ trans('cruds.lesson.fields.weekday') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->weekname }}
+                                                {{ $lesson->weekDays->name ?? '' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.lesson.fields.duration') }}
+                                            </th>
+                                            <td>
+                                                {{ $lesson->duration }} minutes
                                             </td>
                                         </tr>
                                         <tr>

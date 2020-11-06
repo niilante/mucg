@@ -93,6 +93,8 @@ return [
             'lectureHall_helper'    => '',
             'weekday'           => 'Weekday',
             'weekday_helper'    => '',
+            'duration'           => 'Duration',
+            'duration_helper'    => '',
             'start_time'        => 'Start Time',
             'start_time_helper' => '',
             'end_time'          => 'End Time',

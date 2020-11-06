@@ -21,10 +21,10 @@ class Lesson extends Model
     protected $fillable = [
         'title',
         'description',
-        'weekday',
+        'weekday_id',
         'code',
         'duration',
-        'weekname',
+        'session_week_day_id',
         'lecture_hall_id',
         'class_id',
         'end_time',
@@ -36,25 +36,35 @@ class Lesson extends Model
         'deleted_at',
     ];
 
-    const WEEK_DAYS = [
-        '1' => 'Monday',
-        '2' => 'Tuesday',
-        '3' => 'Wednesday',
-        '4' => 'Thursday',
-        '5' => 'Friday',
-        '6' => 'Saturday',
-        '7' => 'Sunday',
-    ];
+    // const WEEK_DAYS = [
+    //     '1' => 'Monday',
+    //     '2' => 'Tuesday',
+    //     '3' => 'Wednesday',
+    //     '4' => 'Thursday',
+    //     '5' => 'Friday',
+    //     '6' => 'Saturday',
+    //     '7' => 'Sunday',
+    // ];
 
-    const LESSON_SESSIONS = [
-        '1' => 'Morning',
-        '2' => 'Evening',
-        '3' => 'Weekend',
-    ];
+    // const LESSON_SESSIONS = [
+    //     '1' => 'Morning',
+    //     '2' => 'Evening',
+    //     '3' => 'Weekend',
+    // ];
 
     public function department()
     {
         return $this->belongsTo(Department::class, "department_id");
+    }
+
+    public function weekDays()
+    {
+        return $this->belongsTo(Department::class, "weekday_id");
+    }
+
+    public function sessionWeekDays()
+    {
+        return $this->belongsTo(Department::class, "session_week_day_id");
     }
 
     public function getDifferenceAttribute()

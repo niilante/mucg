@@ -82,6 +82,17 @@
                                 <span class="help-block">{{ trans('cruds.lesson.fields.department_helper') }}</span>
                             </div>
 
+                            <div class="form-group">
+                                <label class="required" for="duration">{{ trans('cruds.lesson.fields.duration') }}(This is in minutes and <b>NB:</b> Not Less than 30 mins)</label>
+                                <input class="form-control lesson-timepicker {{ $errors->has('duration') ? 'is-invalid' : '' }}" type="text" name="duration" id="duration" value="{{ old('duration') }}" required>
+                                @if($errors->has('duration'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('duration') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.lesson.fields.duration_helper') }}</span>
+                            </div>
+
                             {{-- @foreach( $errors->all() as $error)
                                 <li>{{$error}}</li>
                             @endforeach --}}
