@@ -38,7 +38,7 @@ class LectureHall extends Model
 
     public function getAvailableSchedulesByLesson(Lesson $lesson)
     {
-        $class_size = $lesson->classMembers()->capacity;
+        $class_size = $lesson->classMembers->capacity;
         if ($class_size > $this->capacity) {
             return false;
         }
@@ -61,6 +61,6 @@ class LectureHall extends Model
         // Day time slots means the number of time slots in a day
         $day_time_slots = 17;
         $schedules_interval = 0.5;
-        if
+        // if
     }
 }
