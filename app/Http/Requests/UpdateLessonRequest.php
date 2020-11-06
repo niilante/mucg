@@ -37,10 +37,13 @@ class UpdateLessonRequest extends FormRequest
             'lecture_hall_id'   => [
                 'required',
                 'integer'],
+            'duration'   => [
+                'required',
+                'integer'],
             'lecturer_id' => [
                 'required',
                 'integer'],
-            'weekday'    => [
+            'weekday_id'    => [
                 'required',
                 'integer',
                 'min:1',
