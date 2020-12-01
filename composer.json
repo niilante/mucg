@@ -15,7 +15,7 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^7.4",
         "laravel/telescope": "^2.1",
-        "laravel/tinker": "^1.0",
+        "laravel/tinker": "^2.4",
         "laravel/ui": "^1.1",
         "yajra/laravel-datatables-oracle": "^9.7"
     },
