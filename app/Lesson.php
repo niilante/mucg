@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\LectureHall;
+use App\LessonSchedule;
+
 class Lesson extends Model
 {
     use SoftDeletes;
@@ -145,5 +148,49 @@ class Lesson extends Model
             ->when(request()->input('class_id'), function ($query) {
                 $query->where('class_id', request()->input('class_id'));
             });
+    }
+
+    public funtion getSlotsCountAttribute()
+    {
+        $slot_duration = 30;
+        return $this->duration / $slot_duration;
+    }
+
+    public function canBeHeldAtDaySlot(LectureHall $lecture_hall, $day, $slot)
+    {
+        $day_start_time = '08:00:00';
+        $lessonStartTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
+        $lessonStartTime->addHours(($slot - 1) * 0.5);
+        $lessonEndTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
+        $lessonEndTime->addHours(($slot + $this->slots_count - 1) * 0.5);
+
+        $undesired_schedules = LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
+            ->where('lesson_id', $this->id)
+            ->where('day', $day)
+            ->whereBetween('start_time', [$lessonStartTime->toTimeString(), $lessonEndTime->toTimeString()])
+            ->count();
+
+        $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
+            ->where('lesson_id', $this->id)
+            ->where('day', $day)
+            ->whereBetween('end_time', [$lessonStartTime->toTimeString(), $lessonEndTime->toTimeString()])
+            ->count();
+
+        $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
+            ->where('lesson_id', $this->id)
+            ->where('day', $day)
+            ->where('start_time', '<=', $lessonStartTime->toTimeString())
+            ->where('end_time', '>=', $lessonEndTime->toTimeString())
+            ->count();
+        
+
+        $slot_ranges_are_free = (bool) $undesired_schedule;
+        $all_lecture_slots_are_placeable = ($slot + $this->slots_count) <= 17;
+
+        if ($slot_ranges_are_free && $all_lecture_slots_are_placeable) {
+            return true;
+        }
+
+        return false;
     }
 }

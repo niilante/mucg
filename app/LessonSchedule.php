@@ -12,6 +12,7 @@ class LessonSchedule extends Model
     protected $fillable = [
         'lecture_hall_id',
         'lesson_id',
+        'day',
         'end_time',
         'start_time',
 
