@@ -135,6 +135,16 @@ class Lesson extends Model
         return !$lessons;
     }
 
+    public static function unscheduled()
+    {
+        return self::whereDoesntHave('lessonSchedules');
+    }
+
+    public function lessonSchedules()
+    {
+        return $this->hasMany(LessonSchedule::class);
+    }
+    
     public function scopeCalendarByRoleOrClassId($query)
     {
         return $query->when(!request()->input('class_id'), function ($query) {
@@ -150,7 +160,7 @@ class Lesson extends Model
             });
     }
 
-    public funtion getSlotsCountAttribute()
+    public function getSlotsCountAttribute()
     {
         $slot_duration = 30;
         return $this->duration / $slot_duration;
@@ -183,11 +193,13 @@ class Lesson extends Model
             ->where('end_time', '>=', $lessonEndTime->toTimeString())
             ->count();
         
-
-        $slot_ranges_are_free = (bool) $undesired_schedule;
+        // dd($undesired_schedules);
+        $slot_ranges_are_free = !(bool) $undesired_schedules;
         $all_lecture_slots_are_placeable = ($slot + $this->slots_count) <= 17;
+        // return true ;
 
         if ($slot_ranges_are_free && $all_lecture_slots_are_placeable) {
+            // dd('vvdvc');
             return true;
         }
 

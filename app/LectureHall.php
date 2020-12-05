@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\PluckableTrait;
 use App\Lesson;
-use Collection;
+use Illuminate\Support\Collection;
 
 class LectureHall extends Model
 {
@@ -39,19 +39,22 @@ class LectureHall extends Model
     public function getAvailableSchedulesByLesson(Lesson $lesson)
     {
         $class_size = $lesson->classMembers->capacity;
+                
         if ($class_size > $this->capacity) {
             return false;
         }
 
         $days = [1,2,3,4,5,6,7];
-        $available_schedules = new Collection;
+        $available_schedules = [];
 
         foreach ($days as $day) {
             if ($temp = $this->getAvailableSchedulesByLessonByDay($lesson, $day)) {
-                $available_schedules->merge($temp);
+                $available_schedules[$day] = $temp;
             }
         }
+        // return array_unique($available_schedules);
 
+        // return dd($available_schedules);
         return $available_schedules;
     }
 
@@ -66,11 +69,12 @@ class LectureHall extends Model
 
         $available_slots = [];
         for ($slot = 1; $slot <= $day_time_slots; $slot++) {
-            if($lesson->canBeHeldAtDaySlot($this, $day, $slot)){
+            if ($lesson->canBeHeldAtDaySlot($this, $day, $slot)) {
                 $available_slots[] = $slot;
             }
         }
-        // if
+
+        return $available_slots;
     }
 
     public static function getDayHours($day)

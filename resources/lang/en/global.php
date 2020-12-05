@@ -52,6 +52,7 @@ return [
     'yourAccountNeedsAdminApproval'        => 'Your accounts needs an administrator approval in order to log in',
     'submit'                               => 'Submit',
     'relatedData'                          => 'Related Data',
+    'schedule'                             => 'Schedule',
     'datatables'                           => [
                            'copy'          => 'Copy',
                            'csv'           => 'CSV',

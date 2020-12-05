@@ -108,23 +108,28 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_schedule_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data['lessons'] = Lesson::where('lecture_hall_id', '=', null)
-                                    ->where('weekday_id', '=', null)
-                                    ->where('session_week_day_id', '=', null)
-                                    ->where('start_time', '=', null)
-                                    ->where('end_time', '=', null)
-                                    ->get();
+        $data['lessons'] = Lesson::unscheduled()->get();
 
         return view('admin.lessons.index_scheduler', $data);
     }
 
-    public function postLessonScheduler(Lesson $lesson, Request $request)
-    {
-        $data[] = '';
-        $data['lesson'] = $lesson->update($data);
 
-        return redirect()->route('admin.lessons.index_scheduler');
+    public function lessonScheduler()
+    {
+        $data['lessons'] = Lesson::unscheduled()->get();
+        // dd($data['lessons']);
+        $data['lecture_halls'] = LectureHall::where('id', '>', 0)->get();
+        
+        ini_set('max_execution_time', '300');
+        foreach ($data['lessons'] as $lesson) {
+            $lesson_schedules = LessonSchedule::makeSchedule($lesson, $data['lecture_halls']);
+        }
+
+        return $lesson_schedules;
+        return gettype($lesson_schedules);
+        return redirect()->back();
     }
+
 
     public function destroy(Lesson $lesson)
     {
@@ -141,16 +146,4 @@ class LessonsController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
-
-    // public static function processLessonDay(array $data)
-    // {
-    //     $weekday = $data["weekday"];
-
-    //     $type_str = ["", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"];
-    //     $weekname = ($type_str[$weekday]."day");
-
-    //     $data["weekname"] = $weekname;
-
-    //     return $data;
-    // }
 }

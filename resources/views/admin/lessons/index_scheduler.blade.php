@@ -22,10 +22,28 @@
                                     <i class="ik ik-plus-square"></i>
                                     {{ trans('global.add') }} {{ trans('cruds.lesson.title_singular') }}
                                 </a>
+                                @can('lesson_schedule')
+                                <a href="{{route('admin.lessons.schedule')}}" class="btn btn-outline-info">
+                                    <i class="ik ik-refresh-cw f-16 mr-15 text-blue"></i>
+                                    {{ trans('global.schedule') }} {{ trans('global.all') }} {{ trans('cruds.lesson.title') }}
+                                </a>
+                                @endcan
                             </div>
                         </nav>
                     </div>
                 @endcan
+                {{-- @can('lesson_schedule')
+                    <div class="col-lg-4">
+                        <nav class="breadcrumb-container" aria-label="breadcrumb">
+                            <div>
+                                <a href="{{route('admin.lessons.schedule')}}" class="btn btn-outline-info">
+                                    <i class="ik ik-plus-square"></i>
+                                    {{ trans('global.schedule') }} {{ trans('cruds.lesson.title_singular') }}
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                @endcan --}}
             </div>
         </div>
 

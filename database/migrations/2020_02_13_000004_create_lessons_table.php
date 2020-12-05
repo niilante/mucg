@@ -20,8 +20,8 @@ class CreateLessonsTable extends Migration
                 $table->integer('lecture_hall_id')->unsigned()->nullable();
                 $table->string('session_week_day_id')->nullable();
                 $table->integer('duration');
-                $table->time('start_time')->nullable();
-                $table->time('end_time')->nullable();
+                // $table->time('start_time')->nullable();
+                // $table->time('end_time')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             }
