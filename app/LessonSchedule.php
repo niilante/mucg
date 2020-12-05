@@ -55,6 +55,8 @@ class LessonSchedule extends Model
         $slotEndTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
         $slotEndTime->addHours($slot * 0.5);
 
+        dd($slotEndTime);
+
         return [$slotStartTime, $slotEndTime];
     }
 
