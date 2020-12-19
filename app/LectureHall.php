@@ -62,7 +62,7 @@ class LectureHall extends Model
     {
         // Where time slots = 30 minutes
         // Day time slots means the number of time slots in a day
-        $slot_duration = 30;
+        $slot_duration = 15;
         $day_hours = self::getDayHours($day); // should depend on the day -> LectureHall::getDayHours($day)
         $day_time_slots = $day_hours * 60 / $slot_duration;
         $schedules_interval = 0.5;

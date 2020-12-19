@@ -14,7 +14,7 @@
             <th>
                 {{ trans('cruds.lesson.fields.lecturer') }}
             </th>
-            <th>
+            {{-- <th>
                 {{ trans('cruds.lesson.fields.weekday') }}
             </th>
             <th>
@@ -22,7 +22,7 @@
             </th>
             <th>
                 {{ trans('cruds.lesson.fields.end_time') }}
-            </th>
+            </th> --}}
             <th class="nosort text-center">{{ trans('cruds.lesson.fields.actions') }}</th>
             {{-- <th class="nosort">&nbsp;</th> --}}
         </tr>
@@ -43,7 +43,7 @@
                 <td>
                     {{ $lesson->lecturer->fname ?? '' }}
                 </td>
-                <td>
+                {{-- <td>
                     {{ $lesson->weekname ?? '' }}
                 </td>
                 <td>
@@ -57,7 +57,7 @@
                     @else
                         {{ date('h:i A', strtotime($lesson->end_time)) ?? '' }}
                     @endif
-                </td>
+                </td> --}}
                 <td>
 
                     <div class="table-actions text-center">

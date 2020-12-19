@@ -15,11 +15,11 @@ class TimeService
             array_push(
                 $timeRange,
                 [
-                'start' => $time->format("H:i"),
-                'end' => $time->addMinutes(30)->format("H:i")
+                'start' => $time->format("H:i:s"),
+                'end' => $time->addMinutes(30)->format("H:i:s")
                 ]
             );
-        } while ($time->format("H:i") !== $to);
+        } while ($time->format("H:i:s") !== $to);
 
         return $timeRange;
     }

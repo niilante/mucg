@@ -27,6 +27,7 @@ class LessonsController extends Controller
 
         $data['lessons'] = Lesson::orderBy('updated_at', 'DESC')->get();
 
+        // return LessonSchedule::all();
         return view('admin.lessons.index', $data);
     }
 
@@ -117,16 +118,16 @@ class LessonsController extends Controller
     public function lessonScheduler()
     {
         $data['lessons'] = Lesson::unscheduled()->get();
-        // dd($data['lessons']);
-        $data['lecture_halls'] = LectureHall::where('id', '>', 0)->get();
+        $data['lecture_halls'] = LectureHall::where('id', '>', 0)
+                                            ->where('capacity', '>=', 0)
+                                            ->orderBy('capacity', 'ASC')
+                                            ->get();
         
-        ini_set('max_execution_time', '300');
+        ini_set('max_execution_time', '99900');
         foreach ($data['lessons'] as $lesson) {
             $lesson_schedules = LessonSchedule::makeSchedule($lesson, $data['lecture_halls']);
         }
 
-        return $lesson_schedules;
-        return gettype($lesson_schedules);
         return redirect()->back();
     }
 

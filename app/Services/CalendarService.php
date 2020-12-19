@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Lesson;
+use App\LessonSchedule;
 
 class CalendarService
 {
@@ -10,17 +11,24 @@ class CalendarService
     {
         $calendarData = [];
         $timeRange = (new TimeService)->generateTimeRange(config('app.calendar.start_time'), config('app.calendar.end_time'));
-        $lessons   = Lesson::with('classMembers', 'lecturer', 'lectureHall')
+        $lessons   = Lesson::with('classMembers', 'lecturer')
             ->calendarByRoleOrClassId()
             ->get();
-
+        $lesson_schedules = LessonSchedule::with('lessons', 'lectureHall')->get();
+        // return $lesson_schedules;
         foreach ($timeRange as $time) {
-            $timeText = (date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
+            return $timeText = (date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
             $calendarData[$timeText] = [];
 
+            // return $time;
             foreach ($weekDays as $index => $day) {
-                $lesson = $lessons->where('weekday', $index)->where('start_time', $time['start'])->first();
-
+                // dd($lesson_schedules->first());
+                // return $lesson = $lessons->first();
+                // return $time['start'];
+                
+                return ($lesson_schedule = $lesson_schedules->where('day', $index)->first());
+                // dd($lesson_schedule = $lesson_schedules->where('day', $index)->where('start_time', $time['start'])->first());
+                // return $lesson;
                 if ($lesson) {
                     array_push($calendarData[$timeText], [
                         'class_name'   => $lesson->classMembers->name ?? '',

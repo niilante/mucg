@@ -162,44 +162,35 @@ class Lesson extends Model
 
     public function getSlotsCountAttribute()
     {
-        $slot_duration = 30;
+        $slot_duration = 15;
         return $this->duration / $slot_duration;
     }
 
     public function canBeHeldAtDaySlot(LectureHall $lecture_hall, $day, $slot)
     {
-        $day_start_time = '08:00:00';
-        $lessonStartTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
-        $lessonStartTime->addHours(($slot - 1) * 0.5);
-        $lessonEndTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
-        $lessonEndTime->addHours(($slot + $this->slots_count - 1) * 0.5);
+        $lessonStartTime = LessonSchedule::getTimeBySlot($slot)[0]->toTimeString();
+        $lessonEndTime = LessonSchedule::getTimeBySlot($slot + $this->slots_count)[1]->toTimeString();
 
         $undesired_schedules = LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('lesson_id', $this->id)
             ->where('day', $day)
-            ->whereBetween('start_time', [$lessonStartTime->toTimeString(), $lessonEndTime->toTimeString()])
+            ->whereBetween('start_time', [$lessonStartTime, $lessonEndTime])
             ->count();
 
         $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('lesson_id', $this->id)
             ->where('day', $day)
-            ->whereBetween('end_time', [$lessonStartTime->toTimeString(), $lessonEndTime->toTimeString()])
+            ->whereBetween('end_time', [$lessonStartTime, $lessonEndTime])
             ->count();
 
         $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('lesson_id', $this->id)
             ->where('day', $day)
-            ->where('start_time', '<=', $lessonStartTime->toTimeString())
-            ->where('end_time', '>=', $lessonEndTime->toTimeString())
+            ->where('start_time', '<=', $lessonStartTime)
+            ->where('end_time', '>=', $lessonEndTime)
             ->count();
         
-        // dd($undesired_schedules);
-        $slot_ranges_are_free = !(bool) $undesired_schedules;
-        $all_lecture_slots_are_placeable = ($slot + $this->slots_count) <= 17;
-        // return true ;
+        $slot_ranges_are_free = (bool) $undesired_schedules < 1;
+        $all_lecture_slots_are_placeable = ($slot + $this->slots_count) <= 34;
 
         if ($slot_ranges_are_free && $all_lecture_slots_are_placeable) {
-            // dd('vvdvc');
             return true;
         }
 

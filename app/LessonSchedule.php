@@ -38,8 +38,10 @@ class LessonSchedule extends Model
             $lesson_schedule->lesson_id = $lesson->id;
             $lesson_schedule->lecture_hall_id = $selected_schedule["lecture_hall"];
             $lesson_schedule->day = $selected_schedule["day"];
-            $lesson_schedule->start_time = $temp_time[0];
-            $lesson_schedule->end_time = $temp_time[1];
+            $lesson_schedule->start_time = $temp_time[0]->toTimeString();
+
+            $temp_time = self::getTimeBySlot($selected_schedule["slot"]+ $lesson->slots_count);
+            $lesson_schedule->end_time = $temp_time[0]->toTimeString();
             $lesson_schedule->save();
 
             return $lesson_schedule;
@@ -51,11 +53,10 @@ class LessonSchedule extends Model
     {
         $day_start_time = '08:00:00';
         $slotStartTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
-        $slotStartTime->addHours(($slot - 1) * 0.5);
+        $slotStartTime->addMinutes(($slot - 1) * 15);
         $slotEndTime = Carbon::createFromTimeString($day_start_time, 'Europe/London');
-        $slotEndTime->addHours($slot * 0.5);
+        $slotEndTime->addMinutes($slot * 15);
 
-        dd($slotEndTime);
 
         return [$slotStartTime, $slotEndTime];
     }
@@ -64,12 +65,31 @@ class LessonSchedule extends Model
     {
         if (count($schedules) > 0) {
             foreach ($schedules as $lecture_hall => $lh_schedules) {
-                // dd($schedules);
                 foreach ($lh_schedules[0] as $day => $lh_schedule) {
                     return ["lecture_hall" => $lecture_hall, "day" => $day, "slot" => $lh_schedule[0]];
                 }
             }
         }
         return false;
+    }
+
+    public function classMembers()
+    {
+        return $this->belongsTo(LectureClass::class, 'class_id');
+    }
+
+    public function lectureHall()
+    {
+        return $this->belongsTo(LectureHall::class, 'lecture_hall_id');
+    }
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id');
+    }
+
+    public function lessons()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
 }
