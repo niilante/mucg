@@ -233,5 +233,7 @@ return [
     'calendar' => [
         'start_time'    => '08:00',
         'end_time'      => '21:00',
+        'time_zone' => 'Europe/London',
+        'slot_duration' => 15
     ],
 ];

@@ -13,13 +13,9 @@ class LessonSchedule extends Model
     protected $fillable = [
         'lecture_hall_id',
         'lesson_id',
-        'day',
-        'end_time',
+        'study_mode_day_id',
         'start_time',
-
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'end_time'
     ];
 
     public static function makeSchedule(Lesson $lesson, Collection $lecture_halls)
@@ -37,7 +33,7 @@ class LessonSchedule extends Model
             $lesson_schedule = new LessonSchedule;
             $lesson_schedule->lesson_id = $lesson->id;
             $lesson_schedule->lecture_hall_id = $selected_schedule["lecture_hall"];
-            $lesson_schedule->day = $selected_schedule["day"];
+            $lesson_schedule->study_mode_day_id = $selected_schedule["day"];
             $lesson_schedule->start_time = $temp_time[0]->toTimeString();
 
             $temp_time = self::getTimeBySlot($selected_schedule["slot"]+ $lesson->slots_count);
@@ -66,6 +62,9 @@ class LessonSchedule extends Model
         if (count($schedules) > 0) {
             foreach ($schedules as $lecture_hall => $lh_schedules) {
                 foreach ($lh_schedules[0] as $day => $lh_schedule) {
+                    if (!is_numeric($day)) {
+                        continue;
+                    }
                     return ["lecture_hall" => $lecture_hall, "day" => $day, "slot" => $lh_schedule[0]];
                 }
             }

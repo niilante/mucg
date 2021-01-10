@@ -15,8 +15,10 @@ class CalendarService
             ->calendarByRoleOrClassId()
             ->get();
         $lesson_schedules = LessonSchedule::with('lessons', 'lectureHall')->get();
+        dd($lesson_schedules);
         // return $lesson_schedules;
         foreach ($timeRange as $time) {
+            dd($time);
             return $timeText = (date('h:i A', strtotime($time['start'])) ?? '') . ' - ' . (date('h:i A', strtotime($time['end'])) ?? '');
             $calendarData[$timeText] = [];
 

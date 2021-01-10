@@ -42,31 +42,32 @@
                             </div>
                         @endif
 
+                        <div class="row">
+                            @foreach($study_modes as $study_mode)
+                                <div class="col-lg-3">
+                                    <a href="#" class="btn btn-primary btn-block">{{ $study_mode->name }}</a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="clearfix"></div>
+
+
                         <table class="table table-bordered">
                             <thead>
                                 <th width="125">Time</th>
-                                @foreach($weekDays as $day)
-                                    <th>{{ $day }}</th>
+                                @foreach($study_modes[0]->modeDays as $day)
+                                    <th>{{ $day->name }}</th>
                                 @endforeach
                             </thead>
                             <tbody>
-                                @foreach($calendarData as $time => $days)
+                                @foreach($study_modes[0]->modeDays as $day)
                                     <tr>
                                         <td>
-                                            {{ $time }}
+                                            {{ $day->id }}
                                         </td>
-                                        @foreach($days as $value)
-                                            @if (is_array($value))
-                                                <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-left" style="background-color:#f0f0f0">
-                                                    Class: {{ $value['class_name'] }}<br>
-                                                    Course Code: {{ $value['title'] }}<br>
-                                                    Lecturer: {{ $value['lecturer_name'] }}<br>
-                                                    Lecture Hall: {{ $value['lecture_hall_name'] }}
-                                                </td>
-                                            @elseif ($value === 1)
-                                                <td></td>
-                                            @endif
-                                        @endforeach
+                                        {{-- @foreach($days as $value)
+                                            
+                                        @endforeach --}}
                                     </tr>
                                 @endforeach
                             </tbody>

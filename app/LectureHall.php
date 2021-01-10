@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\PluckableTrait;
 use App\Lesson;
+use App\StudyModeDay;
 use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class LectureHall extends Model
 {
@@ -44,12 +46,15 @@ class LectureHall extends Model
             return false;
         }
 
-        $days = [1,2,3,4,5,6,7];
+        // $days = [1,2,3,4,5,6,7];
+        // $days = $lesson->studyMode->modeDays->pluck("id")->toArray();
+        $days = $lesson->studyMode->modeDays;
         $available_schedules = [];
 
         foreach ($days as $day) {
             if ($temp = $this->getAvailableSchedulesByLessonByDay($lesson, $day)) {
-                $available_schedules[$day] = $temp;
+                $available_schedules["mode_days"][$day->id] = $day;
+                $available_schedules[$day->week_day_id] = $temp;
             }
         }
         // return array_unique($available_schedules);
@@ -58,11 +63,11 @@ class LectureHall extends Model
         return $available_schedules;
     }
 
-    public function getAvailableSchedulesByLessonByDay(Lesson $lesson, $day)
+    public function getAvailableSchedulesByLessonByDay(Lesson $lesson, StudyModeDay $day)
     {
         // Where time slots = 30 minutes
         // Day time slots means the number of time slots in a day
-        $slot_duration = 15;
+        $slot_duration = config('app.calendar.slot_duration');
         $day_hours = self::getDayHours($day); // should depend on the day -> LectureHall::getDayHours($day)
         $day_time_slots = $day_hours * 60 / $slot_duration;
         $schedules_interval = 0.5;
@@ -77,9 +82,13 @@ class LectureHall extends Model
         return $available_slots;
     }
 
-    public static function getDayHours($day)
+    public static function getDayHours(StudyModeDay $day)
     {
-        $hours =  [1 => 18, 2 => 18, 3 => 18, 4 => 18, 5 => 18, 6 => 18, 7 => 18];
-        return $hours[$day];
+        $time_zone = config('app.calendar.time_zone');
+        $startTime = Carbon::createFromTimeString($day->start_time, $time_zone);
+        $endTime = Carbon::createFromTimeString($day->end_time, $time_zone);
+        $hours = $startTime->diffInHours($endTime);
+        
+        return $hours;
     }
 }

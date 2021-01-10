@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
             [
                 SessionWeekDaySeeder::class,
                 WeekDaySeeder::class,
+                StudyModeSeeder::class,
+                StudyModeDaySeeder::class,
                 PermissionsTableSeeder::class,
                 RolesTableSeeder::class,
                 GenderSeeder::class,

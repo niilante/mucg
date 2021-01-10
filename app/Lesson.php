@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\LectureHall;
+use App\StudyMode;
+use App\StudyModeDay;
 use App\LessonSchedule;
 
 class Lesson extends Model
@@ -22,21 +24,13 @@ class Lesson extends Model
     ];
 
     protected $fillable = [
+        'code',
+        'study_mode_id',
         'title',
         'description',
-        'weekday_id',
-        'code',
-        'duration',
-        'session_week_day_id',
-        'lecture_hall_id',
-        'class_id',
-        'end_time',
-        'lecturer_id',
         'department_id',
-        'start_time',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'lecture_hall_id',
+        'duration'
     ];
 
     // const WEEK_DAYS = [
@@ -54,6 +48,11 @@ class Lesson extends Model
     //     '2' => 'Evening',
     //     '3' => 'Weekend',
     // ];
+
+    public function studyMode()
+    {
+        return $this->belongsTo(StudyMode::class, "study_mode_id");
+    }
 
     public function department()
     {
@@ -166,23 +165,23 @@ class Lesson extends Model
         return $this->duration / $slot_duration;
     }
 
-    public function canBeHeldAtDaySlot(LectureHall $lecture_hall, $day, $slot)
+    public function canBeHeldAtDaySlot(LectureHall $lecture_hall, StudyModeDay $day, $slot)
     {
         $lessonStartTime = LessonSchedule::getTimeBySlot($slot)[0]->toTimeString();
         $lessonEndTime = LessonSchedule::getTimeBySlot($slot + $this->slots_count)[1]->toTimeString();
 
         $undesired_schedules = LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('day', $day)
+            ->where('study_mode_day_id', $day->id)
             ->whereBetween('start_time', [$lessonStartTime, $lessonEndTime])
             ->count();
 
         $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('day', $day)
+            ->where('study_mode_day_id', $day->id)
             ->whereBetween('end_time', [$lessonStartTime, $lessonEndTime])
             ->count();
 
         $undesired_schedules += LessonSchedule::where('lecture_hall_id', $lecture_hall->id)
-            ->where('day', $day)
+            ->where('study_mode_day_id', $day->id)
             ->where('start_time', '<=', $lessonStartTime)
             ->where('end_time', '>=', $lessonEndTime)
             ->count();

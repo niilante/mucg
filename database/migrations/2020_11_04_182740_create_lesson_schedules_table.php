@@ -18,7 +18,7 @@ class CreateLessonSchedulesTable extends Migration
             
             $table->integer('lecture_hall_id')->unsigned()->index();
             $table->integer('lesson_id')->unsigned()->index();
-            $table->integer('day');
+            $table->string('study_mode_day_id');
             $table->time('start_time');
             $table->time('end_time');
 
