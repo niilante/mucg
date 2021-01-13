@@ -11,7 +11,7 @@
 
             <div class="page-wrap">
 
-                @include('layouts.admin.side_bar')
+                @include('layouts.admin.sidebar.'.auth()->user()->role_code)
 
                 @yield('content')
                 <aside class="right-sidebar">

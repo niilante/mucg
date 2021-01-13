@@ -68,22 +68,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="required" for="department_id">{{ trans('cruds.lesson.fields.department') }}</label>
-                                <select class="form-control select2 {{ $errors->has('department') ? 'is-invalid' : '' }}" name="department_id" id="department_id" required>
-                                    @foreach($departments as $id => $department)
-                                        <option value="{{ $id }}" {{ old('department_id') == $id ? 'selected' : '' }}>{{ $department }}</option>
+                                <label class="required" for="study_mode_id">{{ trans('cruds.lesson.fields.study_mode') }}</label>
+                                <select class="form-control select2 {{ $errors->has('study_mode') ? 'is-invalid' : '' }}" name="study_mode_id" id="study_mode_id" required>
+                                    @foreach($study_modes as $id => $study_mode)
+                                        <option value="{{ $id }}" {{ old('study_mode_id') == $id ? 'selected' : '' }}>{{ $study_mode }}</option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('department'))
+                                @if($errors->has('study_mode'))
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('department') }}
+                                        {{ $errors->first('study_mode') }}
                                     </div>
                                 @endif
-                                <span class="help-block">{{ trans('cruds.lesson.fields.department_helper') }}</span>
+                                <span class="help-block">{{ trans('cruds.lesson.fields.study_mode_helper') }}</span>
                             </div>
 
                             <div class="form-group">
-                                <label class="required" for="duration">{{ trans('cruds.lesson.fields.duration') }}(This is in minutes and <b>NB:</b> Not Less than 30 mins)</label>
+                                <label class="required" for="duration">{{ trans('cruds.lesson.fields.duration') }} (This is in minutes and <b>NB:</b> Not Less than 30 mins)</label>
                                 <input class="form-control lesson-timepicker {{ $errors->has('duration') ? 'is-invalid' : '' }}" type="text" name="duration" id="duration" value="{{ old('duration') }}" required>
                                 @if($errors->has('duration'))
                                     <div class="invalid-feedback">

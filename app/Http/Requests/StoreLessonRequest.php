@@ -34,28 +34,12 @@ class StoreLessonRequest extends FormRequest
             'duration'   => [
                 'required',
                 'integer'],
-            'department_id'   => [
+            'study_mode_id'   => [
                 'required',
                 'integer'],
-            // 'lecture_hall_id'   => [
-            //     'required',
-            //     'integer'],
             'lecturer_id' => [
                 'required',
                 'integer'],
-            // 'weekday'    => [
-            //     'required',
-            //     'integer',
-            //     'min:1',
-            //     'max:7'],
-            // 'start_time' => [
-            //     'required',
-            //     new LessonTimeAvailabilityRule(),
-            //     'date_format:' . config('panel.lesson_time_format')],
-            // 'end_time'   => [
-            //     'required',
-            //     'after:start_time',
-            //     'date_format:' . config('panel.lesson_time_format')],
         ];
     }
 }

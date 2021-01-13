@@ -31,10 +31,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    {{-- <div class="card-header">
-                        Calendar
-                    </div> --}}
-
                     <div class="card-body">
                         @if(session('status'))
                             <div class="alert alert-success" role="alert">
@@ -42,19 +38,18 @@
                             </div>
                         @endif
 
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 15px !important">
                             @foreach($study_modes as $study_mode)
-                                <div class="col-lg-3">
+                                <div class="col-lg-3 flex">
                                     <a href="#" class="btn btn-primary btn-block">{{ $study_mode->name }}</a>
                                 </div>
                             @endforeach
                         </div>
                         <div class="clearfix"></div>
-
-
+                        
                         <table class="table table-bordered">
                             <thead>
-                                <th width="125">Time</th>
+                                <th width="125">Time / Day</th>
                                 @foreach($study_modes[0]->modeDays as $day)
                                     <th>{{ $day->name }}</th>
                                 @endforeach
@@ -70,6 +65,7 @@
                                         @endforeach --}}
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>

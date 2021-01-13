@@ -43,6 +43,14 @@
                                     <tbody>
                                         <tr>
                                             <th>
+                                                {{ trans('cruds.lesson.fields.code') }}
+                                            </th>
+                                            <td>
+                                                {{ $lesson->code }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
                                                 {{ trans('cruds.lesson.fields.title') }}
                                             </th>
                                             <td>
@@ -54,7 +62,7 @@
                                                 {{ trans('cruds.lesson.fields.class') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->class->name ?? '' }}
+                                                {{ $lesson->classMembers->name ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -75,14 +83,6 @@
                                         </tr>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.lectureHall') }}
-                                            </th>
-                                            <td>
-                                                {{ $lesson->lectureHall->name ?? '' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
                                                 {{ trans('cruds.lesson.fields.lecturer') }}
                                             </th>
                                             <td>
@@ -91,10 +91,10 @@
                                         </tr>
                                         <tr>
                                             <th>
-                                                {{ trans('cruds.lesson.fields.weekday') }}
+                                                {{ trans('cruds.lesson.fields.study_mode') }}
                                             </th>
                                             <td>
-                                                {{ $lesson->weekDays->name ?? '' }}
+                                                {{ $lesson->studyMode->name ?? '' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -105,7 +105,7 @@
                                                 {{ $lesson->duration }} minutes
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <th>
                                                 {{ trans('cruds.lesson.fields.start_time') }}
                                             </th>
@@ -120,7 +120,7 @@
                                             <td>
                                                 {{ date('h:i A', strtotime($lesson->end_time))}}
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

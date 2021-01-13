@@ -29,7 +29,9 @@ class Lesson extends Model
         'title',
         'description',
         'department_id',
-        'lecture_hall_id',
+        'lecturer_id',
+        'class_id',
+        'lesson_status_id',
         'duration'
     ];
 
@@ -61,12 +63,12 @@ class Lesson extends Model
 
     public function weekDays()
     {
-        return $this->belongsTo(Department::class, "weekday_id");
+        return $this->belongsTo(WeekDay::class, "weekday_id");
     }
 
     public function sessionWeekDays()
     {
-        return $this->belongsTo(Department::class, "session_week_day_id");
+        return $this->belongsTo(SessionWeekDay::class, "session_week_day_id");
     }
 
     public function getDifferenceAttribute()
@@ -142,6 +144,11 @@ class Lesson extends Model
     public function lessonSchedules()
     {
         return $this->hasMany(LessonSchedule::class);
+    }
+
+    public function lessonStatus()
+    {
+        return $this->belongsTo(LessonStatus::class, 'lesson_status_id');
     }
     
     public function scopeCalendarByRoleOrClassId($query)

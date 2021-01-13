@@ -50,6 +50,10 @@ Route::group(
         Route::post('schedule/lessons/{lesson}', 'LessonsController@postLessonScheduler')
                 ->name('lessons.post_lesson_scheduler');
 
+        // Route::get('/my-{property_active_status_str?}-properties', 'Property\PropertyListingController@viewPropertiesByType')->name('prowner.property.viewByType')->where(['property_active_status_str' => '[a-zA-Z]+']);
+        Route::get('lessons/pending/{lesson}', 'LessonsController@getPendingLesson')->name('admin.pending.get_lesson');
+        Route::post('lessons/pending/{lesson}', 'LessonsController@postPendingLesson')->name('admin.pending.post_lesson');
+
         // Departments
         Route::delete('departments/destroy', 'DepartmentController@massDestroy')
                 ->name('departments.massDestroy');

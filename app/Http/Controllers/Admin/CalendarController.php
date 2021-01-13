@@ -12,6 +12,7 @@ class CalendarController extends Controller
 {
     public function index(CalendarService $calendarService)
     {
+        // return $data['study_modes'] = StudyMode::with(["modeDays","lessonSchedules"])->get();
         $data['study_modes'] = StudyMode::with(["modeDays","lessonSchedules"])->get();//.lessonSchedules
         // $data['weekDays']     = WeekDay::pluck('name', 'id');
         // return $data['calendarData'] = $calendarService->generateCalendarData($data['weekDays']);

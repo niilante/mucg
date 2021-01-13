@@ -31,7 +31,7 @@ class UpdateLessonRequest extends FormRequest
             'class_id'   => [
                 'required',
                 'integer'],
-            'department_id'   => [
+            'study_mode_id'   => [
                 'required',
                 'integer'],
             'lecture_hall_id'   => [

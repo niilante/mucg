@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateLessonRequest;
 use App\Http\Requests\PostLessonSchedulerRequest;
 use App\Lesson;
 use App\LessonSchedule;
+use App\StudyMode;
 use App\LectureClass;
 use App\LectureHall;
 use App\User;
@@ -41,7 +42,7 @@ class LessonsController extends Controller
 
         $data['lecturers'] = User::all()->pluck('fname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $data['departments'] = Department::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $data['study_modes'] = StudyMode::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.lessons.create', $data);
     }

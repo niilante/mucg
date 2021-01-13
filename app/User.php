@@ -81,7 +81,20 @@ class User extends Authenticatable
             return 'Lecturer';
         }
 
-        return '';
+        return 'User';
+    }
+
+    public function getRoleCodeAttribute()
+    {
+        if ($this->getIsAdminAttribute() == true) {
+            return 'admin';
+        } elseif ($this->getIsStudentAttribute() == true) {
+            return 'student';
+        } else {
+            return 'lecturer';
+        }
+
+        return 'user';
     }
 
     public function gender()
